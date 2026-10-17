@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="RedHood"
-run/main_scene="uid://0qbxrlorl8es"
+run/main_scene="uid://bnxl72prbqrtg"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 
 [autoload]

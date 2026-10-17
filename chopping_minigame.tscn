@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dqvkx6flhobqy"]
+
+[ext_resource type="Script" uid="uid://r1cvec4uqvlg" path="res://chopping_minigame.gd" id="1_h1ha5"]
+
+[node name="ChoppingMinigame" type="Control" unique_id=1979128462]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h1ha5")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1259772941]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ItemPicture" type="TextureRect" parent="." unique_id=1314538242]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 603.0
+offset_top = 106.0
+offset_right = 1246.0
+offset_bottom = 552.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Progress" type="ProgressBar" parent="." unique_id=995271518]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 534.0
+offset_top = 808.0
+offset_right = 1331.0
+offset_bottom = 957.0
+mouse_filter = 2
+
+[node name="Hint" type="Label" parent="." unique_id=1896023713]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 849.0
+offset_top = 174.0
+offset_right = 1063.0
+offset_bottom = 323.0
+theme_override_font_sizes/font_size = 45

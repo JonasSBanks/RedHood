@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dftmpm4c2qjrc"
-path="res://.godot/imported/stove_v2_no_fire.png-68716cfcc9bd3710e70425fdfb94c072.ctex"
+uid="uid://6fv2xggvainj"
+path="res://.godot/imported/grey_background.png-fec61f437e040d66e02a8472c27a1807.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Brewing Stations Sprites/stove_v2_no_fire.png"
-dest_files=["res://.godot/imported/stove_v2_no_fire.png-68716cfcc9bd3710e70425fdfb94c072.ctex"]
+source_file="res://Brewing Stations Sprites/grey_background.png"
+dest_files=["res://.godot/imported/grey_background.png-fec61f437e040d66e02a8472c27a1807.ctex"]
 
 [params]
 

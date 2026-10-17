@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://0qbxrlorl8es"]
 
 [ext_resource type="Texture2D" uid="uid://o5w0stbuag74" path="res://Brewing Stations Sprites/vector_kitchen_minigame_v2_no_assets.png" id="1_2v58e"]
+[ext_resource type="Texture2D" uid="uid://btyynhxulicqp" path="res://Brewing Stations Sprites/cutting_board_v1.png" id="2_q5vih"]
+[ext_resource type="Script" uid="uid://cgw8gxlg7cbts" path="res://Scenes/item_list.gd" id="3_t2sl4"]
+[ext_resource type="Script" uid="uid://b7aoq1w0mfygl" path="res://Scenes/cutting_board.gd" id="4_pbq7o"]
+[ext_resource type="PackedScene" uid="uid://dqvkx6flhobqy" path="res://chopping_minigame.tscn" id="5_uxyhd"]
 
 [node name="Node2D" type="Node2D" unique_id=1956303759]
 
@@ -8,12 +12,9 @@
 texture = ExtResource("1_2v58e")
 centered = false
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=575109832]
-anchor_mode = 0
-
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=293817667]
 
-[node name="Control" type="Control" parent="CanvasLayer" unique_id=1824300335]
+[node name="Cooking Game" type="Control" parent="CanvasLayer" unique_id=1824300335]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,3 +22,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="Ingredient Box" type="HBoxContainer" parent="CanvasLayer/Cooking Game" unique_id=492470450]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 847.0
+offset_right = 795.0
+offset_bottom = 1036.0
+script = ExtResource("3_t2sl4")
+
+[node name="Cutting Board" type="TextureRect" parent="CanvasLayer/Cooking Game" unique_id=600312282]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 341.0
+offset_right = 773.0
+offset_bottom = 803.0
+texture = ExtResource("2_q5vih")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("4_pbq7o")
+minigame_scene = ExtResource("5_uxyhd")
+
+[node name="ItemOnBoard" type="TextureRect" parent="CanvasLayer/Cooking Game/Cutting Board" unique_id=368831260]
+layout_mode = 0
+offset_left = 206.0
+offset_top = 174.0
+offset_right = 346.0
+offset_bottom = 302.0
