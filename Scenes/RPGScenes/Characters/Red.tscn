@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://c34lr5lnxdo16"]
+
+[ext_resource type="Texture2D" uid="uid://cj7opx0spixtj" path="res://icon.svg" id="1_jstqq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uc6ji"]
+size = Vector2(129, 127)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qaae6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jstqq")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1838147545]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1957377172]
+shape = SubResource("RectangleShape2D_uc6ji")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D" unique_id=839994858]
+sprite_frames = SubResource("SpriteFrames_qaae6")

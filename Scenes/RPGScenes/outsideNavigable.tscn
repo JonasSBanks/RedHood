@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dls0iultadfw2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_68nwu"]
+
+[node name="Node2D" type="Node2D" unique_id=1065183325]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1491858225]
+
+[node name="House" type="StaticBody2D" parent="TileMapLayer" unique_id=1542093674]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/House" unique_id=491839077]
+shape = SubResource("RectangleShape2D_68nwu")
+
+[node name="WorldDesign" type="Sprite2D" parent="TileMapLayer" unique_id=2083304295]
