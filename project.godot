@@ -11,13 +11,20 @@ config_version=5
 [application]
 
 config/name="RedHood"
+run/main_scene="uid://0qbxrlorl8es"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*uid://brbk8udvtew44"
 
 [display]
 
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/window_width_override=1152
+window/size/window_height_override=648
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 
 [physics]
 
