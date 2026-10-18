@@ -2,15 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://6fv2xggvainj" path="res://Brewing Stations Sprites/grey_background.png" id="1_3hlh8"]
 [ext_resource type="Texture2D" uid="uid://b3qvpyq30y27a" path="res://Brewing Stations Sprites/wolfsbane_v1.png" id="2_mb32j"]
-[ext_resource type="Script" uid="uid://d04gcfrjfls7u" path="res://Scripts/check_box_wolfsbane.gd" id="3_3hlh8"]
+[ext_resource type="Script" uid="uid://chapprpe60u8r" path="res://Scripts/ingredient_checkbox.gd" id="3_6bvld"]
 [ext_resource type="Texture2D" uid="uid://1cynpytdij5b" path="res://Brewing Stations Sprites/mushroom_v1.png" id="4_3mvp1"]
-[ext_resource type="Script" uid="uid://cr7qf76l1st3l" path="res://Scripts/check_box_mushroom.gd" id="5_10r5w"]
 [ext_resource type="Texture2D" uid="uid://bjo6s1i0akvvk" path="res://Brewing Stations Sprites/honey_v1.png" id="6_yk5nb"]
-[ext_resource type="Script" uid="uid://b4x3msuxlnv04" path="res://Scripts/check_box_honey.gd" id="7_3hlh8"]
 [ext_resource type="Texture2D" uid="uid://b2vmqhs7vgr7a" path="res://Brewing Stations Sprites/butterfly_v1.png" id="8_hjep5"]
-[ext_resource type="Script" uid="uid://726klnrkbubx" path="res://Scripts/check_box_butterfly.gd" id="9_3hlh8"]
 [ext_resource type="Texture2D" uid="uid://c3qn5motktpcc" path="res://Brewing Stations Sprites/plum_v1.png" id="10_krind"]
-[ext_resource type="Script" uid="uid://cd4n8la0c1qms" path="res://Scripts/check_box_fruit.gd" id="11_3hlh8"]
 [ext_resource type="Script" uid="uid://nb313ntyxd5p" path="res://Scripts/button.gd" id="12_3hlh8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_wwrea"]
@@ -50,8 +46,7 @@ offset_bottom = 245.20285
 scale = Vector2(5, 5)
 theme_override_constants/icon_max_width = 17
 theme_override_icons/icon = ExtResource("2_mb32j")
-text = "Wolfsbane"
-script = ExtResource("3_3hlh8")
+script = ExtResource("3_6bvld")
 
 [node name="CheckBoxMushroom" type="CheckBox" parent="CanvasLayer/Control" unique_id=2037488740]
 layout_mode = 0
@@ -62,8 +57,8 @@ offset_bottom = 263.79993
 scale = Vector2(5, 5)
 theme_override_constants/icon_max_width = 17
 theme_override_icons/icon = ExtResource("4_3mvp1")
-text = "Wolfsbane"
-script = ExtResource("5_10r5w")
+script = ExtResource("3_6bvld")
+ingredient_name = "Mushroom"
 
 [node name="CheckBoxHoney" type="CheckBox" parent="CanvasLayer/Control" unique_id=1689964128]
 layout_mode = 0
@@ -74,8 +69,8 @@ offset_bottom = 516.2028
 scale = Vector2(5, 5)
 theme_override_constants/icon_max_width = 17
 theme_override_icons/icon = ExtResource("6_yk5nb")
-text = "Wolfsbane"
-script = ExtResource("7_3hlh8")
+script = ExtResource("3_6bvld")
+ingredient_name = "Honey"
 
 [node name="CheckBoxButterfly" type="CheckBox" parent="CanvasLayer/Control" unique_id=1674262057]
 layout_mode = 0
@@ -86,20 +81,68 @@ offset_bottom = 538.7999
 scale = Vector2(5, 5)
 theme_override_constants/icon_max_width = 17
 theme_override_icons/icon = ExtResource("8_hjep5")
-text = "Butterfly"
-script = ExtResource("9_3hlh8")
+script = ExtResource("3_6bvld")
+ingredient_name = "Butterfly"
 
 [node name="CheckBoxFruit" type="CheckBox" parent="CanvasLayer/Control" unique_id=394912987]
 layout_mode = 0
-offset_left = 687.99994
-offset_top = 702.99994
-offset_right = 773.99994
-offset_bottom = 738.7999
+offset_left = 493.0
+offset_top = 699.0
+offset_right = 579.0
+offset_bottom = 734.8
 scale = Vector2(5, 5)
 theme_override_constants/icon_max_width = 17
 theme_override_icons/icon = ExtResource("10_krind")
-text = "Fruit"
-script = ExtResource("11_3hlh8")
+script = ExtResource("3_6bvld")
+ingredient_name = "Fruit"
+
+[node name="CheckBoxBadButterfly" type="CheckBox" parent="CanvasLayer/Control" unique_id=1198264059]
+layout_mode = 0
+offset_left = 502.0
+offset_top = 517.0
+offset_right = 588.0
+offset_bottom = 552.8
+scale = Vector2(5, 5)
+theme_override_constants/icon_max_width = 17
+theme_override_icons/icon = ExtResource("10_krind")
+script = ExtResource("3_6bvld")
+ingredient_name = "Bad Butterfly"
+
+[node name="CheckBoxBadMushroom" type="CheckBox" parent="CanvasLayer/Control" unique_id=1813618716]
+layout_mode = 0
+offset_left = 465.0
+offset_top = 238.00003
+offset_right = 551.0
+offset_bottom = 273.80002
+scale = Vector2(5, 5)
+theme_override_constants/icon_max_width = 17
+theme_override_icons/icon = ExtResource("10_krind")
+script = ExtResource("3_6bvld")
+ingredient_name = "Bad Mushroom"
+
+[node name="CheckBoxBadHoney" type="CheckBox" parent="CanvasLayer/Control" unique_id=1793854699]
+layout_mode = 0
+offset_left = 988.0
+offset_top = 694.0
+offset_right = 1074.0
+offset_bottom = 729.8
+scale = Vector2(5, 5)
+theme_override_constants/icon_max_width = 17
+theme_override_icons/icon = ExtResource("10_krind")
+script = ExtResource("3_6bvld")
+ingredient_name = "Bad Honey"
+
+[node name="CheckBoxFermentedFruit" type="CheckBox" parent="CanvasLayer/Control" unique_id=1859687383]
+layout_mode = 0
+offset_left = 62.00006
+offset_top = 727.0
+offset_right = 148.00006
+offset_bottom = 762.8
+scale = Vector2(5, 5)
+theme_override_constants/icon_max_width = 17
+theme_override_icons/icon = ExtResource("10_krind")
+script = ExtResource("3_6bvld")
+ingredient_name = "Fermented Fruit"
 
 [node name="Button" type="Button" parent="CanvasLayer/Control" unique_id=2143707841]
 layout_mode = 0
@@ -116,3 +159,7 @@ script = ExtResource("12_3hlh8")
 [connection signal="toggled" from="CanvasLayer/Control/CheckBoxHoney" to="CanvasLayer/Control/CheckBoxHoney" method="_on_toggled"]
 [connection signal="toggled" from="CanvasLayer/Control/CheckBoxButterfly" to="CanvasLayer/Control/CheckBoxButterfly" method="_on_toggled"]
 [connection signal="toggled" from="CanvasLayer/Control/CheckBoxFruit" to="CanvasLayer/Control/CheckBoxFruit" method="_on_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/CheckBoxBadButterfly" to="CanvasLayer/Control/CheckBoxBadButterfly" method="_on_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/CheckBoxBadMushroom" to="CanvasLayer/Control/CheckBoxBadMushroom" method="_on_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/CheckBoxBadHoney" to="CanvasLayer/Control/CheckBoxBadHoney" method="_on_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/CheckBoxFermentedFruit" to="CanvasLayer/Control/CheckBoxFermentedFruit" method="_on_toggled"]

@@ -16,7 +16,8 @@ extends Control
 ##   Shrinking: 2, 1, 0 once               brew bar paused   (when the burn time runs out)
 ##
 ## Needs (with Access as Unique Name on):
-##   %CauldronPicture  a TextureRect (your cauldron picture)
+##   %CauldronPicture  a TextureRect (in the potion's color, set by the cauldron:
+##                     stage 2 while the fire is small, stage 3 bubbling while it's big)
 ##   %Fire             a TextureRect under the cauldron - drop logs here
 ##   %WoodPile         a TextureRect (your wood pile picture) - drag logs from here
 ##   %BrewBar          a ProgressBar (how done the potion is)
@@ -45,6 +46,16 @@ enum FireState { SMALL, GROWING, BIG, FLARING, SHRINKING }
 @export var change_frame_time: float = 0.1
 ## How long each frame shows in the small and big loops.
 @export var loop_frame_time: float = 0.25
+## How long each cauldron bubbling frame shows.
+@export var cauldron_frame_time: float = 0.15
+
+## Set by the cauldron before the minigame opens: its 4 bubbling frames in the
+## potion's color. If empty, CauldronPicture keeps whatever it shows in the editor.
+var cauldron_frames: Array[Texture2D] = []
+## Set by the cauldron: the stage 2 picture, shown while the fire isn't big.
+var cauldron_still: Texture2D
+var _cauldron_index := 0
+var _cauldron_timer := 0.0
 
 const GROW_FRAMES := [0, 2, 3, 4, 5]
 const BIG_LOOP := [2, 3]
@@ -85,10 +96,16 @@ func _ready() -> void:
 	fire.set_drag_forwarding(Callable(), _can_drop_log, _drop_log)
 	cauldron_picture.set_drag_forwarding(Callable(), _can_drop_log, _drop_log)
 
+	if cauldron_still:
+		cauldron_picture.texture = cauldron_still
+	elif not cauldron_frames.is_empty():
+		cauldron_picture.texture = cauldron_frames[0]
+
 	_set_state(FireState.SMALL)
 
 
 func _process(delta: float) -> void:
+	_animate_cauldron(delta)
 	if _done:
 		return
 	_animate(delta)
@@ -190,3 +207,27 @@ func _complete() -> void:
 	hint.text = "The potion is ready!"
 	await get_tree().create_timer(0.8).timeout
 	finished.emit()
+
+
+## The cauldron bubbles (stage 3, frames 1-4) only while the fire is big under
+## it. Otherwise it shows the still stage 2 picture.
+func _animate_cauldron(delta: float) -> void:
+	if cauldron_frames.is_empty():
+		return
+	var boiling := _state == FireState.BIG or _state == FireState.FLARING
+	if not boiling:
+		_cauldron_index = -1  # start from frame 1 next time it boils
+		var still := cauldron_still if cauldron_still else cauldron_frames[0]
+		if cauldron_picture.texture != still:
+			cauldron_picture.texture = still
+		return
+	if _cauldron_index == -1:  # just started boiling: switch to stage 3 right away
+		_cauldron_index = 0
+		_cauldron_timer = 0.0
+		cauldron_picture.texture = cauldron_frames[0]
+		return
+	_cauldron_timer += delta
+	if _cauldron_timer >= cauldron_frame_time:
+		_cauldron_timer = 0.0
+		_cauldron_index = (_cauldron_index + 1) % cauldron_frames.size()
+		cauldron_picture.texture = cauldron_frames[_cauldron_index]

@@ -1,12 +1,13 @@
 extends DropTarget
-## The cutting board. Accepts a dragged Mushroom, shows it on the board,
+## The cutting board. Accepts a dragged Mushroom or Bad Mushroom, shows it on the board,
 ## and opens the chopping minigame on top of the kitchen.
 ## After the minigame, the board holds the chopped version.
 ##
 ## Needs a child TextureRect called ItemOnBoard to show the ingredient.
 
-## The only ingredient that can be chopped.
-const CHOPPABLE := "Mushroom"
+## The ingredients that can be chopped. "Chopped " is added to the front
+## after the minigame: "Bad Mushroom" -> "Chopped Bad Mushroom".
+const CHOPPABLE := ["Mushroom", "Bad Mushroom"]
 
 ## The minigame scene. Drag chopping_minigame.tscn into this slot in the Inspector.
 @export var minigame_scene: PackedScene
@@ -30,9 +31,9 @@ func has_item() -> bool:
 	return _item_name != ""
 
 
-## Only takes a Mushroom, and only when the board is empty.
+## Only takes a choppable ingredient, and only when the board is empty.
 func can_accept(data: Dictionary) -> bool:
-	return not has_item() and data["name"] == CHOPPABLE
+	return not has_item() and data["name"] in CHOPPABLE
 
 
 ## Puts the ingredient on the board, then opens the minigame.

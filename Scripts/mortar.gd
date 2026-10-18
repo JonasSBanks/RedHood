@@ -1,5 +1,5 @@
 extends DropTarget
-## The mortar and pestle. Accepts Wolfs Bane or Butterfly, opens the grinding
+## The mortar and pestle. Accepts Wolfs Bane, Butterfly or Bad Butterfly, opens the grinding
 ## minigame on top of the kitchen, and afterwards shows the powder in the mortar.
 ##
 ## Set this node's Texture to mortar_final.png in the Inspector (the empty mortar).
@@ -10,13 +10,18 @@ extends DropTarget
 const POWDERS := {
 	"Wolfs Bane": "Wolfsbane Powder",
 	"Butterfly": "Butterfly Powder",
+	"Bad Butterfly": "Bad Butterfly Powder",
+}
+
+## Powder -> picture of the mortar with that powder in it (no folder, no .png).
+const MORTAR_PICTURES := {
+	"Wolfsbane Powder": "mortar_powder_wolfsbane_final",
+	"Butterfly Powder": "mortar_powder_butterfly_good_final",
+	"Bad Butterfly Powder": "mortar_powder_butterfly_bad_final",
 }
 
 ## The minigame scene. Drag grinding_minigame.tscn into this slot.
 @export var minigame_scene: PackedScene
-## Mortar pictures with powder in them. Drag the matching files into these slots.
-@export var wolfsbane_powder_mortar: Texture2D   ## mortar_powder_wolfsbane_final.png
-@export var butterfly_powder_mortar: Texture2D   ## mortar_powder_butterfly_good_final.png
 
 @onready var item_in_mortar: TextureRect = $ItemInMortar
 
@@ -78,13 +83,13 @@ func _on_minigame_finished(layer: CanvasLayer) -> void:
 	_minigame_open = false
 	_ground = true
 
-	var powder_mortar := _powder_mortar_for(_item_name)
 	_item_name = POWDERS[_item_name]
+	var powder_mortar := Ingredient.load_sprite(MORTAR_PICTURES.get(_item_name, ""))
 	if powder_mortar:
 		texture = powder_mortar          # the mortar picture already shows the powder
 		item_in_mortar.texture = null
 	else:
-		# No picture set in the Inspector: show the placeholder square instead.
+		# No mortar picture for this powder: show the powder on its own instead.
 		item_in_mortar.texture = Ingredient.get_texture(_item_name)
 
 
@@ -122,13 +127,3 @@ func clear() -> void:
 	_ground = false
 	texture = _empty_texture
 	item_in_mortar.texture = null
-
-
-## Which powder-filled mortar picture goes with which ingredient.
-func _powder_mortar_for(ingredient: String) -> Texture2D:
-	match ingredient:
-		"Wolfs Bane":
-			return wolfsbane_powder_mortar
-		"Butterfly":
-			return butterfly_powder_mortar
-	return null

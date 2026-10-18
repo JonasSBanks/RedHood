@@ -4,9 +4,13 @@ extends Node
 var pocket = {
 	"Wolfs Bane": 1,
 	"Butterfly": 1,
+	"Bad Butterfly": 1,
 	"Honey": 1,
+	"Bad Honey": 1,
 	"Mushroom": 1,
-	"Fruit": 1
+	"Bad Mushroom": 1,
+	"Fruit": 1,
+	"Fermented Fruit": 1,
 }
 
 # Tracks the keys of the ingredients the player has selected
@@ -29,9 +33,13 @@ const USE_TEST_REFILL := true
 const TEST_POCKET := {
 	"Wolfs Bane": 1,
 	"Butterfly": 1,
+	"Bad Butterfly": 1,
 	"Honey": 1,
+	"Bad Honey": 1,
 	"Mushroom": 1,
+	"Bad Mushroom": 1,
 	"Fruit": 1,
+	"Fermented Fruit": 1,
 }
 
 ## TEMP: test shortcuts. Set to false before releasing the game.
@@ -94,6 +102,13 @@ var day: int = 1
 ## can be found.
 var has_read_page_2: bool = false
 
+## True while Grandma is in the kitchen. Kept up to date by grandma.gd;
+## the book and the Wolfs Bane check read it.
+var grandma_in_room: bool = false
+
+## Seconds left on the kitchen clock (0 outside the kitchen). Set by kitchen_timer.gd.
+var kitchen_time_left: float = 0.0
+
 
 ## ===== DAY RULES =====
 
@@ -143,6 +158,11 @@ func take_selected_from_pocket() -> void:
 ##   GameManager.end_day(GameManager.Outcome.SNATCHED)
 ## Updates the day counter, then plays the matching cutscene.
 func end_day(outcome: Outcome) -> void:
+	# Only the first end of the day counts (e.g. time running out in the same
+	# moment the potion finishes).
+	if _in_cutscene:
+		print("Ignored a second end of day: ", Outcome.keys()[outcome])  # for testing
+		return
 	_last_outcome = outcome
 	_day_played = day
 	_showing_hint = false
@@ -202,7 +222,12 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if _debug_label:
-		_debug_label.text = "Day %d  |  Page 2 read: %s" % [day, "yes" if has_read_page_2 else "no"]
+		_debug_label.text = "Day %d  |  Page 2 read: %s  |  Grandma: %s  |  Time: %s" % [
+			day,
+			"yes" if has_read_page_2 else "no",
+			"IN THE ROOM" if grandma_in_room else "out",
+			"%ds" % ceili(kitchen_time_left) if kitchen_time_left > 0.0 else "-",
+		]
 
 
 func _unhandled_input(event: InputEvent) -> void:

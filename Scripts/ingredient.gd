@@ -3,18 +3,30 @@ class_name Ingredient
 ## One draggable ingredient button on the shelf. You never place these by
 ## hand: item_list.gd creates one for each name in selected_ingredients.
 
-## Where ingredient pictures live, and the ending on each file name.
-## The ingredient name is turned into lowercase with underscores, so:
-##   "Mushroom"   -> res://Brewing Stations Sprites/mushroom_v1.png
-##   "Wolfs Bane" -> res://Brewing Stations Sprites/wolfs_bane_v1.png
+## Where all the sprite pictures live.
 const TEXTURE_FOLDER := "res://Brewing Stations Sprites/"
-const TEXTURE_SUFFIX := "_v1"
 
-## Pictures that don't follow the naming rule above. Name -> file name
-## (no folder, no .png). These are checked first.
-const TEXTURE_OVERRIDES := {
-	"Wolfsbane Powder": "powder_wolfsbane_final",
+## Every ingredient name -> its picture file (no folder, no .png).
+## The names on the left are the exact names used in GameManager.pocket and
+## everywhere else. To add an ingredient, add a line here.
+const TEXTURES := {
+	# Raw ingredients (what's in the pocket)
+	"Butterfly": "butterfly_good_final",
+	"Bad Butterfly": "butterfly_bad_final",
+	"Mushroom": "mushroom_good_final",
+	"Bad Mushroom": "mushroom_bad_final",
+	"Honey": "honey_good_final",
+	"Bad Honey": "honey_bad_final",
+	"Fruit": "plum_final",
+	"Fermented Fruit": "plum_fermented_final",
+	"Wolfs Bane": "wolfsbane_final",
+	# After the cutting board
+	"Chopped Mushroom": "mushroom_chopped_good_final",
+	"Chopped Bad Mushroom": "mushroom_chopped_bad_final",
+	# After the mortar
 	"Butterfly Powder": "powder_butterfly_good_final",
+	"Bad Butterfly Powder": "powder_butterfly_bad_final",
+	"Wolfsbane Powder": "powder_wolfsbane_final",
 }
 ## Color of the plain square shown when an ingredient has no picture yet.
 const FALLBACK_COLOR := Color(0.85, 0.3, 0.6)
@@ -58,19 +70,26 @@ func _notification(what: int) -> void:
 		get_parent().use_item(ingredient_name)
 
 
-## Finds the picture for an ingredient by name. If there isn't one yet,
-## returns a plain colored square so the button is still visible.
+## Finds the picture for an ingredient by name. If there isn't one, returns
+## a plain colored square so it's still visible (and prints which is missing).
 ## Static so other scripts can use it too.
 static func get_texture(item_name: String) -> Texture2D:
-	var file_name: String = item_name.to_lower().replace(" ", "_") + TEXTURE_SUFFIX
-	if TEXTURE_OVERRIDES.has(item_name):
-		file_name = TEXTURE_OVERRIDES[item_name]
-	var path := TEXTURE_FOLDER + file_name + ".png"
-	if ResourceLoader.exists(path):
-		return load(path)
+	var picture := load_sprite(TEXTURES.get(item_name, ""))
+	if picture:
+		return picture
+	print("No picture for ingredient: ", item_name)  # for testing
 	var image := Image.create(64, 64, false, Image.FORMAT_RGBA8)
 	image.fill(FALLBACK_COLOR)
 	return ImageTexture.create_from_image(image)
+
+
+## Loads a picture from the sprites folder by file name (no folder, no .png),
+## or returns null if it doesn't exist. Used by the mortar and squeeze spot too.
+static func load_sprite(file_name: String) -> Texture2D:
+	var path := TEXTURE_FOLDER + file_name + ".png"
+	if file_name != "" and ResourceLoader.exists(path):
+		return load(path)
+	return null
 
 
 ## Builds the see-through picture that follows the mouse, centered on the cursor.

@@ -8,14 +8,18 @@
 [ext_resource type="Texture2D" uid="uid://c71r2kdqf6cpm" path="res://Brewing Stations Sprites/mortar_final.png" id="6_a5466"]
 [ext_resource type="Script" uid="uid://d2tmffh4d2g4j" path="res://Scripts/mortar.gd" id="7_0sqtt"]
 [ext_resource type="PackedScene" uid="uid://d2h0mfx7827b5" path="res://Scenes/grinding_minigame.tscn" id="8_digll"]
-[ext_resource type="Texture2D" uid="uid://kt5tigdh4iqk" path="res://Brewing Stations Sprites/powder_wolfsbane_final.png" id="9_57t66"]
-[ext_resource type="Texture2D" uid="uid://b1j2vddh03rpr" path="res://Brewing Stations Sprites/powder_butterfly_good_final.png" id="10_mxqhq"]
 [ext_resource type="Texture2D" uid="uid://bfu2jpvec0xln" path="res://Brewing Stations Sprites/cauldron_good_final.png" id="11_6rl12"]
 [ext_resource type="Script" uid="uid://bhmq0voqhitoq" path="res://Scripts/cauldron.gd" id="12_f2n2i"]
+[ext_resource type="Script" uid="uid://dyfekjrtyp5un" path="res://Scenes/recipe_book.gd" id="13_bap62"]
 [ext_resource type="Script" uid="uid://bdcp6pfak02a5" path="res://Scripts/squeeze_spot.gd" id="13_f2n2i"]
 [ext_resource type="PackedScene" uid="uid://clawpro7xyr2i" path="res://Scenes/boiling_minigame.tscn" id="13_th3l3"]
-[ext_resource type="Texture2D" uid="uid://di5cdyjqt2u6h" path="res://Brewing Stations Sprites/honey_pour_good_final.png" id="14_th3l3"]
-[ext_resource type="Texture2D" uid="uid://cpjqqdqxx8bka" path="res://Brewing Stations Sprites/plum_juiced_final.png" id="15_vo3np"]
+[ext_resource type="Script" uid="uid://d36lky8yvbbxw" path="res://Scenes/grandma.gd" id="13_vo3np"]
+[ext_resource type="Texture2D" uid="uid://cg4y4b3m77k4a" path="res://Brewing Stations Sprites/Grandma_Temp.png" id="14_bap62"]
+[ext_resource type="Texture2D" uid="uid://c4rpilr0cqvmy" path="res://Brewing Stations Sprites/book_page_one_final_no_arrow.png" id="14_kte2b"]
+[ext_resource type="Texture2D" uid="uid://drpt7oww8wcf5" path="res://Brewing Stations Sprites/book_arrow_final_pointing_right.png" id="15_kjilo"]
+[ext_resource type="Texture2D" uid="uid://dud0ng45hbo23" path="res://Brewing Stations Sprites/Footprint_Temp.png" id="15_vpw7v"]
+[ext_resource type="Texture2D" uid="uid://dbsrr1m6i042q" path="res://Brewing Stations Sprites/book_arrow_final_pointing_left.png" id="16_n8gw7"]
+[ext_resource type="Script" uid="uid://ubfg181nb00f" path="res://Scenes/kitchen_timer.gd" id="16_th3l3"]
 
 [node name="Node2D" type="Node2D" unique_id=1956303759]
 
@@ -84,8 +88,6 @@ expand_mode = 1
 stretch_mode = 5
 script = ExtResource("7_0sqtt")
 minigame_scene = ExtResource("8_digll")
-wolfsbane_powder_mortar = ExtResource("9_57t66")
-butterfly_powder_mortar = ExtResource("10_mxqhq")
 
 [node name="ItemInMortar" type="TextureRect" parent="CanvasLayer/Cooking Game/Mortar" unique_id=1295671399]
 layout_mode = 0
@@ -124,8 +126,6 @@ offset_right = 245.59998
 offset_bottom = 126.799995
 script = ExtResource("13_f2n2i")
 cauldron = NodePath("../Cauldron")
-honey_pouring_texture = ExtResource("14_th3l3")
-plum_squeezed_texture = ExtResource("15_vo3np")
 
 [node name="SqueezeItem" type="TextureRect" parent="CanvasLayer/Cooking Game/SqueezeSpot" unique_id=1650193370]
 layout_mode = 1
@@ -138,3 +138,123 @@ offset_left = -88.60802
 offset_top = -82.078
 offset_right = 88.39198
 offset_bottom = 81.922
+
+[node name="RecipeBook" type="Control" parent="CanvasLayer/Cooking Game" unique_id=308123875]
+layout_mode = 1
+anchor_left = 0.13900001
+anchor_top = 0.337
+anchor_right = 0.13900001
+anchor_bottom = 0.337
+offset_left = -164.88004
+offset_top = -149.96002
+offset_right = 163.11996
+offset_bottom = 151.03998
+script = ExtResource("13_bap62")
+
+[node name="PageImage" type="TextureRect" parent="CanvasLayer/Cooking Game/RecipeBook" unique_id=59611634]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -176.0
+offset_top = 9.0
+offset_right = 203.0
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_kte2b")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NextArrow" type="TextureButton" parent="CanvasLayer/Cooking Game/RecipeBook" unique_id=769089929]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.90500003
+anchor_top = 0.929
+anchor_right = 0.90500003
+anchor_bottom = 0.929
+offset_left = -33.839996
+offset_top = -26.628998
+offset_right = 34.160004
+offset_bottom = 26.371002
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("15_kjilo")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BackArrow" type="TextureButton" parent="CanvasLayer/Cooking Game/RecipeBook" unique_id=1141881528]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.067
+anchor_top = 0.96300006
+anchor_right = 0.067
+anchor_bottom = 0.96300006
+offset_left = -26.976
+offset_top = -19.863007
+offset_right = 27.024
+offset_bottom = 20.136993
+grow_vertical = 0
+texture_normal = ExtResource("16_n8gw7")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="SnatchSound" type="AudioStreamPlayer" parent="CanvasLayer/Cooking Game/RecipeBook" unique_id=2137439726]
+
+[node name="Grandma" type="CanvasLayer" parent="." unique_id=903420290]
+script = ExtResource("13_vo3np")
+
+[node name="GrandmaPicture" type="TextureRect" parent="Grandma" unique_id=495686818]
+anchors_preset = -1
+anchor_left = 0.245
+anchor_top = 0.098000005
+anchor_right = 0.245
+anchor_bottom = 0.098000005
+offset_left = -64.400024
+offset_top = -66.840004
+offset_right = 62.599976
+offset_bottom = 67.159996
+texture = ExtResource("14_bap62")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FootstepsIndicator" type="TextureRect" parent="Grandma" unique_id=572529376]
+anchors_preset = -1
+anchor_left = 0.171
+anchor_top = 0.096
+anchor_right = 0.171
+anchor_bottom = 0.096
+offset_left = -56.320007
+offset_top = -56.68
+offset_right = 54.679993
+offset_bottom = 56.32
+texture = ExtResource("15_vpw7v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FoootstepsSound" type="AudioStreamPlayer" parent="Grandma" unique_id=888570097]
+
+[node name="EnterSound" type="AudioStreamPlayer" parent="Grandma" unique_id=687085557]
+
+[node name="LeaveSound" type="AudioStreamPlayer" parent="Grandma" unique_id=2101260837]
+
+[node name="KitchenTimer" type="CanvasLayer" parent="." unique_id=170750168]
+script = ExtResource("16_th3l3")
+
+[node name="WarningLabel" type="Label" parent="KitchenTimer" unique_id=568707008]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.032
+anchor_right = 0.5
+anchor_bottom = 0.032
+offset_left = -213.0
+offset_top = -34.56
+offset_right = 189.0
+offset_bottom = 33.44
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="WarningSound" type="AudioStreamPlayer" parent="KitchenTimer" unique_id=1796930553]
+
+[node name="FinalWarningSound" type="AudioStreamPlayer" parent="KitchenTimer" unique_id=1905777328]

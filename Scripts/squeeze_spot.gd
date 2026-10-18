@@ -1,5 +1,5 @@
 extends DropTarget
-## The squeeze spot above the cauldron. Drop Honey or Fruit here: it squishes
+## The squeeze spot above the cauldron. Drop Honey or Fruit (good or bad) here: it squishes
 ## a few times, switches to its pouring/squeezed picture, drips down, and goes
 ## into the cauldron.
 ##
@@ -12,9 +12,13 @@ extends DropTarget
 
 ## The cauldron this spot drips into. Drag your Cauldron node into this slot.
 @export var cauldron: Node
-## Pictures shown after the squishes, while it drips. Drag your PNGs in here.
-@export var honey_pouring_texture: Texture2D
-@export var plum_squeezed_texture: Texture2D
+## Item -> picture shown after the squishes, while it drips (no folder, no .png).
+const POUR_PICTURES := {
+	"Honey": "honey_pour_good_final",
+	"Bad Honey": "honey_pour_bad_final",
+	"Fruit": "plum_juiced_final",
+	"Fermented Fruit": "plum_juiced_fermented_final",
+}
 ## How many squishes before it pours.
 @export var squeezes: int = 3
 ## How far down it drips toward the cauldron, in pixels.
@@ -62,6 +66,9 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
 
 ## Only when not already squeezing, and only if the cauldron still has room.
 func can_accept(_data: Dictionary) -> bool:
+	if cauldron == null:
+		push_error("SqueezeSpot: drag the Cauldron node into the Cauldron slot in the Inspector.")
+		return false
 	return not _busy and not cauldron.is_full()
 
 
@@ -88,7 +95,7 @@ func _squeeze(item_name: String) -> void:
 	await t.finished
 
 	# Switch to the pouring honey / squeezed fruit picture, if one is set.
-	var pour_texture := _pour_texture_for(item_name)
+	var pour_texture := Ingredient.load_sprite(POUR_PICTURES.get(item_name, ""))
 	if pour_texture:
 		squeeze_item.texture = pour_texture
 		await get_tree().create_timer(0.4).timeout  # hold it so the player sees it
@@ -107,13 +114,3 @@ func _squeeze(item_name: String) -> void:
 	squeeze_item.modulate.a = 1.0
 	cauldron.add_ingredient(item_name)
 	_busy = false
-
-
-## Which pouring/squeezed picture goes with which item.
-func _pour_texture_for(item_name: String) -> Texture2D:
-	match item_name:
-		"Honey":
-			return honey_pouring_texture
-		"Fruit":
-			return plum_squeezed_texture
-	return null

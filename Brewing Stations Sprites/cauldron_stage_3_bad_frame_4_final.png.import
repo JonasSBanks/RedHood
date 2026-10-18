@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0843ko3lwkia"
-path="res://.godot/imported/cookbook_final.png-a068bfea823ecf4b0343efd15708d133.ctex"
+uid="uid://deye63w8ge7vh"
+path="res://.godot/imported/cauldron_stage_3_bad_frame_4_final.png-9219f34c4c391717654d376be3e8649b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Brewing Stations Sprites/cookbook_final.png"
-dest_files=["res://.godot/imported/cookbook_final.png-a068bfea823ecf4b0343efd15708d133.ctex"]
+source_file="res://Brewing Stations Sprites/cauldron_stage_3_bad_frame_4_final.png"
+dest_files=["res://.godot/imported/cauldron_stage_3_bad_frame_4_final.png-9219f34c4c391717654d376be3e8649b.ctex"]
 
 [params]
 
