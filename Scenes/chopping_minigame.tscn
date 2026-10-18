@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://r1cvec4uqvlg" path="res://Scripts/chopping_minigame.gd" id="1_h1ha5"]
 [ext_resource type="AudioStream" uid="uid://bq3rcujms5xqj" path="res://Brewing Stations Sprites/Chop_Sound.mp3" id="2_d16uq"]
+[ext_resource type="Texture2D" uid="uid://choidivlrs7s" path="res://Brewing Stations Sprites/cut_effect_finak.png" id="3_xe263"]
 
 [node name="ChoppingMinigame" type="Control" unique_id=1979128462]
 layout_mode = 3
@@ -12,6 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h1ha5")
 chop_sound = ExtResource("2_d16uq")
+gash_texture = ExtResource("3_xe263")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1259772941]
 layout_mode = 1
