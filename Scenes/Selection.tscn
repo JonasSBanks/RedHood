@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://bnxl72prbqrtg"]
 
-[ext_resource type="Texture2D" uid="uid://6fv2xggvainj" path="res://Brewing Stations Sprites/grey_background.png" id="1_5yfny"]
-[ext_resource type="Texture2D" uid="uid://b3qvpyq30y27a" path="res://Brewing Stations Sprites/wolfsbane_v1.png" id="2_f4ve4"]
-[ext_resource type="Script" uid="uid://d04gcfrjfls7u" path="res://check_box_wolfsbane.gd" id="3_extqw"]
-[ext_resource type="Script" uid="uid://nb313ntyxd5p" path="res://button.gd" id="4_extqw"]
-[ext_resource type="Texture2D" uid="uid://1cynpytdij5b" path="res://Brewing Stations Sprites/mushroom_v1.png" id="4_i4him"]
-[ext_resource type="Script" uid="uid://cr7qf76l1st3l" path="res://check_box_mushroom.gd" id="5_c5fps"]
-[ext_resource type="Texture2D" uid="uid://bjo6s1i0akvvk" path="res://Brewing Stations Sprites/honey_v1.png" id="6_56ckk"]
-[ext_resource type="Script" uid="uid://b4x3msuxlnv04" path="res://check_box_honey.gd" id="7_77tt6"]
-[ext_resource type="Texture2D" uid="uid://b2vmqhs7vgr7a" path="res://Brewing Stations Sprites/butterfly_v1.png" id="8_wux7p"]
-[ext_resource type="Script" uid="uid://726klnrkbubx" path="res://check_box_butterfly.gd" id="9_rir65"]
-[ext_resource type="Texture2D" uid="uid://c3qn5motktpcc" path="res://Brewing Stations Sprites/plum_v1.png" id="10_o5mmc"]
-[ext_resource type="Script" uid="uid://cd4n8la0c1qms" path="res://check_box_fruit.gd" id="11_gwopg"]
+[ext_resource type="Texture2D" uid="uid://6fv2xggvainj" path="res://Brewing Stations Sprites/grey_background.png" id="1_3hlh8"]
+[ext_resource type="Texture2D" uid="uid://b3qvpyq30y27a" path="res://Brewing Stations Sprites/wolfsbane_v1.png" id="2_mb32j"]
+[ext_resource type="Script" uid="uid://d04gcfrjfls7u" path="res://Scripts/check_box_wolfsbane.gd" id="3_3hlh8"]
+[ext_resource type="Texture2D" uid="uid://1cynpytdij5b" path="res://Brewing Stations Sprites/mushroom_v1.png" id="4_3mvp1"]
+[ext_resource type="Script" uid="uid://cr7qf76l1st3l" path="res://Scripts/check_box_mushroom.gd" id="5_10r5w"]
+[ext_resource type="Texture2D" uid="uid://bjo6s1i0akvvk" path="res://Brewing Stations Sprites/honey_v1.png" id="6_yk5nb"]
+[ext_resource type="Script" uid="uid://b4x3msuxlnv04" path="res://Scripts/check_box_honey.gd" id="7_3hlh8"]
+[ext_resource type="Texture2D" uid="uid://b2vmqhs7vgr7a" path="res://Brewing Stations Sprites/butterfly_v1.png" id="8_hjep5"]
+[ext_resource type="Script" uid="uid://726klnrkbubx" path="res://Scripts/check_box_butterfly.gd" id="9_3hlh8"]
+[ext_resource type="Texture2D" uid="uid://c3qn5motktpcc" path="res://Brewing Stations Sprites/plum_v1.png" id="10_krind"]
+[ext_resource type="Script" uid="uid://cd4n8la0c1qms" path="res://Scripts/check_box_fruit.gd" id="11_3hlh8"]
+[ext_resource type="Script" uid="uid://nb313ntyxd5p" path="res://Scripts/button.gd" id="12_3hlh8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_wwrea"]
 font_size = 100
@@ -19,7 +19,7 @@ font_size = 100
 [node name="Node2D" type="Node2D" unique_id=1426711300]
 
 [node name="background" type="Sprite2D" parent="." unique_id=1433611006]
-texture = ExtResource("1_5yfny")
+texture = ExtResource("1_3hlh8")
 centered = false
 
 [node name="Label" type="Label" parent="background" unique_id=275993717]
@@ -49,9 +49,9 @@ offset_right = 177.00002
 offset_bottom = 245.20285
 scale = Vector2(5, 5)
 theme_override_constants/icon_max_width = 17
-theme_override_icons/icon = ExtResource("2_f4ve4")
+theme_override_icons/icon = ExtResource("2_mb32j")
 text = "Wolfsbane"
-script = ExtResource("3_extqw")
+script = ExtResource("3_3hlh8")
 
 [node name="CheckBoxMushroom" type="CheckBox" parent="CanvasLayer/Control" unique_id=2037488740]
 layout_mode = 0
@@ -61,9 +61,9 @@ offset_right = 1101.0
 offset_bottom = 263.79993
 scale = Vector2(5, 5)
 theme_override_constants/icon_max_width = 17
-theme_override_icons/icon = ExtResource("4_i4him")
+theme_override_icons/icon = ExtResource("4_3mvp1")
 text = "Wolfsbane"
-script = ExtResource("5_c5fps")
+script = ExtResource("5_10r5w")
 
 [node name="CheckBoxHoney" type="CheckBox" parent="CanvasLayer/Control" unique_id=1689964128]
 layout_mode = 0
@@ -73,9 +73,9 @@ offset_right = 207.0
 offset_bottom = 516.2028
 scale = Vector2(5, 5)
 theme_override_constants/icon_max_width = 17
-theme_override_icons/icon = ExtResource("6_56ckk")
+theme_override_icons/icon = ExtResource("6_yk5nb")
 text = "Wolfsbane"
-script = ExtResource("7_77tt6")
+script = ExtResource("7_3hlh8")
 
 [node name="CheckBoxButterfly" type="CheckBox" parent="CanvasLayer/Control" unique_id=1674262057]
 layout_mode = 0
@@ -85,9 +85,9 @@ offset_right = 1102.0
 offset_bottom = 538.7999
 scale = Vector2(5, 5)
 theme_override_constants/icon_max_width = 17
-theme_override_icons/icon = ExtResource("8_wux7p")
+theme_override_icons/icon = ExtResource("8_hjep5")
 text = "Butterfly"
-script = ExtResource("9_rir65")
+script = ExtResource("9_3hlh8")
 
 [node name="CheckBoxFruit" type="CheckBox" parent="CanvasLayer/Control" unique_id=394912987]
 layout_mode = 0
@@ -97,9 +97,9 @@ offset_right = 773.99994
 offset_bottom = 738.7999
 scale = Vector2(5, 5)
 theme_override_constants/icon_max_width = 17
-theme_override_icons/icon = ExtResource("10_o5mmc")
+theme_override_icons/icon = ExtResource("10_krind")
 text = "Fruit"
-script = ExtResource("11_gwopg")
+script = ExtResource("11_3hlh8")
 
 [node name="Button" type="Button" parent="CanvasLayer/Control" unique_id=2143707841]
 layout_mode = 0
@@ -109,7 +109,7 @@ offset_right = 1179.0
 offset_bottom = 1012.0
 theme_override_font_sizes/font_size = 60
 text = "Start"
-script = ExtResource("4_extqw")
+script = ExtResource("12_3hlh8")
 
 [connection signal="toggled" from="CanvasLayer/Control/CheckBoxWolfsbane" to="CanvasLayer/Control/CheckBoxWolfsbane" method="_on_toggled"]
 [connection signal="toggled" from="CanvasLayer/Control/CheckBoxMushroom" to="CanvasLayer/Control/CheckBoxMushroom" method="_on_toggled"]

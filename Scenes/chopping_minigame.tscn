@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dqvkx6flhobqy"]
 
-[ext_resource type="Script" uid="uid://r1cvec4uqvlg" path="res://chopping_minigame.gd" id="1_h1ha5"]
+[ext_resource type="Script" uid="uid://r1cvec4uqvlg" path="res://Scripts/chopping_minigame.gd" id="1_h1ha5"]
 
 [node name="ChoppingMinigame" type="Control" unique_id=1979128462]
 layout_mode = 3

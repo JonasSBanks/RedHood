@@ -9,6 +9,13 @@ class_name Ingredient
 ##   "Wolfs Bane" -> res://Brewing Stations Sprites/wolfs_bane_v1.png
 const TEXTURE_FOLDER := "res://Brewing Stations Sprites/"
 const TEXTURE_SUFFIX := "_v1"
+
+## Pictures that don't follow the naming rule above. Name -> file name
+## (no folder, no .png). These are checked first.
+const TEXTURE_OVERRIDES := {
+	"Wolfsbane Powder": "powder_wolfsbane_final",
+	"Butterfly Powder": "powder_butterfly_good_final",
+}
 ## Color of the plain square shown when an ingredient has no picture yet.
 const FALLBACK_COLOR := Color(0.85, 0.3, 0.6)
 
@@ -55,7 +62,10 @@ func _notification(what: int) -> void:
 ## returns a plain colored square so the button is still visible.
 ## Static so other scripts can use it too.
 static func get_texture(item_name: String) -> Texture2D:
-	var path := TEXTURE_FOLDER + item_name.to_lower().replace(" ", "_") + TEXTURE_SUFFIX + ".png"
+	var file_name: String = item_name.to_lower().replace(" ", "_") + TEXTURE_SUFFIX
+	if TEXTURE_OVERRIDES.has(item_name):
+		file_name = TEXTURE_OVERRIDES[item_name]
+	var path := TEXTURE_FOLDER + file_name + ".png"
 	if ResourceLoader.exists(path):
 		return load(path)
 	var image := Image.create(64, 64, false, Image.FORMAT_RGBA8)

@@ -16,6 +16,7 @@ const CHOPPABLE := "Mushroom"
 var _item_name: String = ""  # empty = board is empty
 var _chopped := false  # true once the minigame has been beaten
 var _minigame_open := false
+var _dragging := false  # true while the chopped item is being dragged off
 
 
 func _ready() -> void:
@@ -73,3 +74,37 @@ func _on_minigame_finished(layer: CanvasLayer) -> void:
 	_chopped = true
 	_item_name = "Chopped " + _item_name
 	item_on_board.texture = Ingredient.get_texture(_item_name)
+
+
+## Lets the chopped item (not the board) be dragged off, e.g. to the cauldron.
+## Only once it's chopped, and never while the minigame is open.
+func _get_drag_data(_at_position: Vector2) -> Variant:
+	if not _chopped or _minigame_open:
+		return null
+	_dragging = true
+	set_drag_preview(Ingredient.make_preview(item_on_board.texture, item_on_board.size))
+	item_on_board.modulate.a = 0.4  # dim while "in hand"
+	return {
+		"type": "ingredient",
+		"name": _item_name,
+		"from": "board",
+		"chopped": true,
+	}
+
+
+## When the drag ends: if something took the item, the board empties.
+## If not, the item stays and un-dims. (DropTarget's version also runs.)
+func _notification(what: int) -> void:
+	if what != NOTIFICATION_DRAG_END or not _dragging:
+		return
+	_dragging = false
+	item_on_board.modulate.a = 1.0
+	if get_viewport().gui_is_drag_successful():
+		clear()
+
+
+## Empties the board so it can take another Mushroom.
+func clear() -> void:
+	_item_name = ""
+	_chopped = false
+	item_on_board.texture = null
