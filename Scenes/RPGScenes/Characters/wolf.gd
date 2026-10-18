@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 
-<<<<<<< Updated upstream
 var max_speed = 100
 
 var last_direction := Vector2(1,0)
@@ -20,17 +19,12 @@ var last_direction := Vector2(1,0)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$CollisionShape2D/GrandmaSprites.play("grandmaDown")
-=======
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
->>>>>>> Stashed changes
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-<<<<<<< Updated upstream
 
 func play_walk_animation(direction) :
 	if direction.x > 0 :
@@ -44,5 +38,3 @@ func play_walk_animation(direction) :
 
 func upscale() :
 	scale = Vector2(2.0, 2.0)
-=======
->>>>>>> Stashed changes

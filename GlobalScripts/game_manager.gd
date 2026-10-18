@@ -1,17 +1,12 @@
 extends Node
 
-# This dictionary stores your state in RAM while the game runs
-var pocket = {
-	"Wolfs Bane": 1,
-	"Butterfly": 1,
-	"Bad Butterfly": 1,
-	"Honey": 1,
-	"Bad Honey": 1,
-	"Mushroom": 1,
-	"Bad Mushroom": 1,
-	"Fruit": 1,
-	"Fermented Fruit": 1,
-}
+# This dictionary stores your state in RAM while the game runs.
+# Starts empty: the player fills it by foraging outside (forage_spot.gd).
+var pocket: Dictionary = {}
+
+## Forage spots already picked today (by node name), so walking into the
+## house and back out doesn't regrow them. Cleared when a day starts.
+var foraged_today: Array[String] = []
 
 # Tracks the keys of the ingredients the player has selected
 var selected_ingredients: Array[String] = []
@@ -31,7 +26,7 @@ var current_recipe = {
 
 ## TEMP: while there's no foraging yet, every new day refills the pocket with
 ## TEST_POCKET so you can keep testing. Set to false once foraging exists.
-const USE_TEST_REFILL := true
+const USE_TEST_REFILL := false
 const TEST_POCKET := {
 	"Wolfs Bane": 1,
 	"Butterfly": 1,
@@ -129,9 +124,9 @@ const HINT_SCENES := {
 ## Which endings are followed by a hint scene.
 const OUTCOMES_WITH_HINTS := [Outcome.GOOD, Outcome.WRONG]
 
-## The first scene of every day (new or restarted).
-## TEMP: using the selection page until the real day-start scene exists.
-const DAY_START_SCENE := "res://Scenes/Selection.tscn"
+## The first scene of every day (new or restarted): the forest outside the
+## house. From there: forage -> house -> kitchen counter -> Selection -> Kitchen.
+const DAY_START_SCENE := "res://Scenes/RPGScenes/outsideNavigable.tscn"
 ## Plays after the ending cutscene.
 const CREDITS_SCENE := "res://Scenes/credits.tscn"
 
@@ -295,6 +290,7 @@ func restart_game() -> void:
 	day = 1
 	has_read_page_2 = false
 	stash.clear()
+	foraged_today.clear()
 	pocket = TEST_POCKET.duplicate() if USE_TEST_REFILL else {}
 	_last_outcome = Outcome.GOOD
 	_showing_hint = false
@@ -311,6 +307,7 @@ func restart_game() -> void:
 func start_day() -> void:
 	_in_cutscene = false
 	selected_ingredients.clear()
+	foraged_today.clear()
 	if USE_TEST_REFILL:
 		pocket = TEST_POCKET.duplicate()
 	elif not KEEP_UNUSED_POCKET:

@@ -18,10 +18,6 @@ config/features=PackedStringArray("4.7", "GL Compatibility")
 
 GameManager="*uid://brbk8udvtew44"
 
-[autoload]
-
-GameManager="*uid://brbk8udvtew44"
-
 [display]
 
 window/size/viewport_width=1920
