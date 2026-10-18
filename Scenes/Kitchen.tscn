@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bfu2jpvec0xln" path="res://Brewing Stations Sprites/cauldron_good_final.png" id="11_6rl12"]
 [ext_resource type="Script" uid="uid://bhmq0voqhitoq" path="res://Scenes/cauldron.gd" id="12_f2n2i"]
 [ext_resource type="Script" uid="uid://bdcp6pfak02a5" path="res://Scenes/squeeze_spot.gd" id="13_f2n2i"]
+[ext_resource type="PackedScene" uid="uid://clawpro7xyr2i" path="res://Scenes/boiling_minigame.tscn" id="13_th3l3"]
 [ext_resource type="Texture2D" uid="uid://di5cdyjqt2u6h" path="res://Brewing Stations Sprites/honey_pour_good_final.png" id="14_th3l3"]
 [ext_resource type="Texture2D" uid="uid://cpjqqdqxx8bka" path="res://Brewing Stations Sprites/plum_juiced_final.png" id="15_vo3np"]
 
@@ -106,6 +107,7 @@ texture = ExtResource("11_6rl12")
 expand_mode = 1
 stretch_mode = 5
 script = ExtResource("12_f2n2i")
+minigame_scene = ExtResource("13_th3l3")
 
 [node name="SqueezeSpot" type="TextureRect" parent="CanvasLayer/Cooking Game" unique_id=2065754130 node_paths=PackedStringArray("cauldron")]
 layout_mode = 1

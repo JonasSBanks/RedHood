@@ -12,7 +12,6 @@ grow_vertical = 2
 script = ExtResource("1_h1ha5")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1259772941]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,6 +19,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+color = Color(0.11764706, 0.101960786, 0.08627451, 0.46666667)
 
 [node name="ItemPicture" type="TextureRect" parent="." unique_id=1314538242]
 unique_name_in_owner = true
