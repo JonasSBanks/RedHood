@@ -6,13 +6,13 @@
 [ext_resource type="Script" uid="uid://b7aoq1w0mfygl" path="res://Scripts/cutting_board.gd" id="4_pbq7o"]
 [ext_resource type="PackedScene" uid="uid://dqvkx6flhobqy" path="res://Scenes/chopping_minigame.tscn" id="5_uxyhd"]
 [ext_resource type="Texture2D" uid="uid://c71r2kdqf6cpm" path="res://Brewing Stations Sprites/mortar_final.png" id="6_a5466"]
-[ext_resource type="Script" uid="uid://d2tmffh4d2g4j" path="res://Scenes/mortar.gd" id="7_0sqtt"]
+[ext_resource type="Script" uid="uid://d2tmffh4d2g4j" path="res://Scripts/mortar.gd" id="7_0sqtt"]
 [ext_resource type="PackedScene" uid="uid://d2h0mfx7827b5" path="res://Scenes/grinding_minigame.tscn" id="8_digll"]
 [ext_resource type="Texture2D" uid="uid://kt5tigdh4iqk" path="res://Brewing Stations Sprites/powder_wolfsbane_final.png" id="9_57t66"]
 [ext_resource type="Texture2D" uid="uid://b1j2vddh03rpr" path="res://Brewing Stations Sprites/powder_butterfly_good_final.png" id="10_mxqhq"]
 [ext_resource type="Texture2D" uid="uid://bfu2jpvec0xln" path="res://Brewing Stations Sprites/cauldron_good_final.png" id="11_6rl12"]
-[ext_resource type="Script" uid="uid://bhmq0voqhitoq" path="res://Scenes/cauldron.gd" id="12_f2n2i"]
-[ext_resource type="Script" uid="uid://bdcp6pfak02a5" path="res://Scenes/squeeze_spot.gd" id="13_f2n2i"]
+[ext_resource type="Script" uid="uid://bhmq0voqhitoq" path="res://Scripts/cauldron.gd" id="12_f2n2i"]
+[ext_resource type="Script" uid="uid://bdcp6pfak02a5" path="res://Scripts/squeeze_spot.gd" id="13_f2n2i"]
 [ext_resource type="PackedScene" uid="uid://clawpro7xyr2i" path="res://Scenes/boiling_minigame.tscn" id="13_th3l3"]
 [ext_resource type="Texture2D" uid="uid://di5cdyjqt2u6h" path="res://Brewing Stations Sprites/honey_pour_good_final.png" id="14_th3l3"]
 [ext_resource type="Texture2D" uid="uid://cpjqqdqxx8bka" path="res://Brewing Stations Sprites/plum_juiced_final.png" id="15_vo3np"]
@@ -65,6 +65,8 @@ offset_left = -66.5
 offset_top = -61.5
 offset_right = 73.5
 offset_bottom = 66.5
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Mortar" type="TextureRect" parent="CanvasLayer/Cooking Game" unique_id=251294881]
 layout_mode = 1

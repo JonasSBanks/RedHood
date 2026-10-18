@@ -21,4 +21,5 @@ func _on_start_pressed() -> void:
 		return
 		
 	# 3. If they did select something, change the scene
+	GameManager.take_selected_from_pocket()
 	get_tree().change_scene_to_file("res://Scenes/Kitchen.tscn")

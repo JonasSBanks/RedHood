@@ -39,6 +39,7 @@ func _ready() -> void:
 	item_picture.texture = Ingredient.get_texture(item_name)
 	progress.min_value = 0
 	progress.max_value = 100
+	progress.step = 0.0  # no rounding, so small changes show up
 	progress.value = 0  # starts empty
 	hint.text = "Circle the mouse to grind the %s!" % item_name
 

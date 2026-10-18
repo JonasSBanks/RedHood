@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dx84y86331wxq"]
+
+[ext_resource type="Script" uid="uid://cmrce0dh7lkdd" path="res://Scripts/cutscene.gd" id="1_g36ti"]
+
+[node name="Control" type="Control" unique_id=1461263197]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g36ti")
+
+[node name="Label" type="Label" parent="." unique_id=1327868608]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "wolf"

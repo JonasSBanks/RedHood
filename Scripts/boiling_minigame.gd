@@ -2,7 +2,7 @@ extends Control
 ## The boiling minigame. Opened on top of the kitchen by cauldron.gd when the
 ## 4th ingredient goes in.
 ##
-## Drag logs from the wood pile onto the fire. Each log plays the growing
+## Drag logs from the wood pile onto the fire (or the cauldron). Each log plays the growing
 ## animation and gives the fire some burn time. While the fire is big
 ## (boiling), the brew bar fills. When the burn time runs out, the fire
 ## shrinks, and while it's small the brew bar drains backwards.
@@ -10,8 +10,9 @@ extends Control
 ##
 ## Fire animation (frames 0-5 set in Fire Frames):
 ##   Small:     loops 1, 0, 1, 0 ...       brew bar drains
-##   Growing:   0, 2, 3, 4, 5 once         brew bar paused   (every time a log is added)
+##   Growing:   0, 2, 3, 4, 5 once         brew bar paused   (a log added to a small fire)
 ##   Big:       loops 2, 3, 2, 3 ...       brew bar fills
+##   Flaring:   4, 5 once, then Big        brew bar fills    (a log added to a big fire)
 ##   Shrinking: 2, 1, 0 once               brew bar paused   (when the burn time runs out)
 ##
 ## Needs (with Access as Unique Name on):
@@ -24,7 +25,7 @@ extends Control
 ## Tells the cauldron the potion has finished boiling.
 signal finished
 
-enum FireState { SMALL, GROWING, BIG, SHRINKING }
+enum FireState { SMALL, GROWING, BIG, FLARING, SHRINKING }
 
 ## The 6 fire pictures, in order: frame 0 in slot 0, up to frame 5 in slot 5.
 @export var fire_frames: Array[Texture2D] = []
@@ -47,6 +48,7 @@ enum FireState { SMALL, GROWING, BIG, SHRINKING }
 
 const GROW_FRAMES := [0, 2, 3, 4, 5]
 const BIG_LOOP := [2, 3]
+const FLARE_FRAMES := [4, 5]
 const SHRINK_FRAMES := [2, 1, 0]
 const SMALL_LOOP := [1, 0]
 
@@ -69,15 +71,19 @@ func _ready() -> void:
 	if fire_frames.size() < 6:
 		push_error("BoilingMinigame: put all 6 fire pictures (frames 0-5) into Fire Frames.")
 
+	brew_bar.step = 0.0  # no rounding, so tiny per-frame changes show up
 	brew_bar.max_value = brew_seconds
 	brew_bar.value = 0  # starts empty
 
 	# The wood pile hands out logs, and the fire takes them. Drag forwarding
 	# lets this one script handle both nodes, so they don't need scripts.
+	# Logs can be dropped on the fire OR the cauldron above it.
 	wood_pile.mouse_filter = Control.MOUSE_FILTER_STOP
 	fire.mouse_filter = Control.MOUSE_FILTER_STOP
+	cauldron_picture.mouse_filter = Control.MOUSE_FILTER_STOP
 	wood_pile.set_drag_forwarding(_get_log_drag, Callable(), Callable())
 	fire.set_drag_forwarding(Callable(), _can_drop_log, _drop_log)
+	cauldron_picture.set_drag_forwarding(Callable(), _can_drop_log, _drop_log)
 
 	_set_state(FireState.SMALL)
 
@@ -88,7 +94,7 @@ func _process(delta: float) -> void:
 	_animate(delta)
 
 	match _state:
-		FireState.BIG:
+		FireState.BIG, FireState.FLARING:
 			brew_bar.value += delta
 			_burn_left -= delta
 			if _burn_left <= 0.0:
@@ -112,6 +118,8 @@ func _set_state(new_state: FireState) -> void:
 		FireState.BIG:
 			_frames = BIG_LOOP
 			hint.text = "Keep it boiling!"
+		FireState.FLARING:
+			_frames = FLARE_FRAMES
 		FireState.SHRINKING:
 			_frames = SHRINK_FRAMES
 	_frame_index = 0
@@ -119,8 +127,8 @@ func _set_state(new_state: FireState) -> void:
 	_show_frame(_frames[0])
 
 
-## Steps through the current frames. Loops repeat; growing and shrinking play
-## once and then hand over to big or small.
+## Steps through the current frames. Loops repeat; growing, flaring and
+## shrinking play once and then hand over to big or small.
 func _animate(delta: float) -> void:
 	var is_loop := _state == FireState.SMALL or _state == FireState.BIG
 	var frame_time := loop_frame_time if is_loop else change_frame_time
@@ -133,7 +141,7 @@ func _animate(delta: float) -> void:
 	if _frame_index >= _frames.size():
 		if is_loop:
 			_frame_index = 0
-		elif _state == FireState.GROWING:
+		elif _state == FireState.GROWING or _state == FireState.FLARING:
 			_set_state(FireState.BIG)
 			return
 		else:  # finished shrinking
@@ -161,10 +169,19 @@ func _can_drop_log(_at_position: Vector2, data: Variant) -> bool:
 	return not _done and data is Dictionary and data.get("type") == "wood"
 
 
-## A log adds burn time and always plays the growing animation (0,2,3,4,5).
+## A log always adds burn time. What it shows depends on the fire:
+##   small or shrinking -> full grow (0,2,3,4,5), brewing paused until it's big
+##   already growing    -> keep growing, don't restart the animation
+##   big or flaring     -> quick flare (4,5), and brewing keeps going
 func _drop_log(_at_position: Vector2, _data: Variant) -> void:
 	_burn_left = min(_burn_left + burn_seconds_per_log, max_burn_seconds)
-	_set_state(FireState.GROWING)
+	print("Log added. Burn time left: ", _burn_left)  # for testing, remove later
+	match _state:
+		FireState.SMALL, FireState.SHRINKING:
+			_set_state(FireState.GROWING)
+		FireState.BIG, FireState.FLARING:
+			_set_state(FireState.FLARING)
+		# GROWING: leave the animation running, the burn time is already added
 
 
 ## Brew bar is full: short pause so the player sees it, then tell the cauldron.

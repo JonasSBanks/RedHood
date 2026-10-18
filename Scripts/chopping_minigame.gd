@@ -31,6 +31,7 @@ func _ready() -> void:
 	item_picture.texture = Ingredient.get_texture(item_name)
 	progress.min_value = 0
 	progress.max_value = 100
+	progress.step = 0.0  # no rounding, so the slow drain shows up
 	progress.value = 0  # starts empty
 	hint.text = "Click fast to chop the %s!" % item_name
 

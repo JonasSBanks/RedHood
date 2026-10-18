@@ -11,7 +11,7 @@ signal ingredient_added(ingredient_name: String)
 ## Sent when the 4th ingredient goes in (right before boiling starts).
 signal cauldron_full
 ## Sent when boiling is finished. good = true if it's the correct potion.
-## The cutscenes will listen for this later.
+## Right after this, the cauldron ends the day through GameManager.end_day().
 signal potion_brewed(good: bool)
 
 const MAX_INGREDIENTS := 4
@@ -74,13 +74,15 @@ func _open_minigame() -> void:
 	get_tree().current_scene.add_child(layer)
 
 
-## Boiling is done: close the minigame, check the recipe, and report it.
+## Boiling is done: close the minigame, check the recipe, report it, and
+## end the day with the matching outcome.
 func _on_minigame_finished(layer: CanvasLayer) -> void:
 	layer.queue_free()
 	_minigame_open = false
 	var good := is_good_potion()
 	print("Potion finished! Good potion: ", good)  # for testing, remove later
 	potion_brewed.emit(good)
+	GameManager.end_day(GameManager.Outcome.GOOD if good else GameManager.Outcome.WRONG)
 
 
 ## True if the 4 ingredients are exactly the good recipe (order doesn't matter).
