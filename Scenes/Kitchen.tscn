@@ -13,13 +13,16 @@
 [ext_resource type="Script" uid="uid://dyfekjrtyp5un" path="res://Scenes/recipe_book.gd" id="13_bap62"]
 [ext_resource type="Script" uid="uid://bdcp6pfak02a5" path="res://Scripts/squeeze_spot.gd" id="13_f2n2i"]
 [ext_resource type="PackedScene" uid="uid://clawpro7xyr2i" path="res://Scenes/boiling_minigame.tscn" id="13_th3l3"]
-[ext_resource type="Script" uid="uid://d36lky8yvbbxw" path="res://Scenes/grandma.gd" id="13_vo3np"]
+[ext_resource type="Script" uid="uid://d36lky8yvbbxw" path="res://Scripts/grandma.gd" id="13_vo3np"]
 [ext_resource type="Texture2D" uid="uid://cg4y4b3m77k4a" path="res://Brewing Stations Sprites/Grandma_Temp.png" id="14_bap62"]
 [ext_resource type="Texture2D" uid="uid://c4rpilr0cqvmy" path="res://Brewing Stations Sprites/book_page_one_final_no_arrow.png" id="14_kte2b"]
 [ext_resource type="Texture2D" uid="uid://drpt7oww8wcf5" path="res://Brewing Stations Sprites/book_arrow_final_pointing_right.png" id="15_kjilo"]
 [ext_resource type="Texture2D" uid="uid://dud0ng45hbo23" path="res://Brewing Stations Sprites/Footprint_Temp.png" id="15_vpw7v"]
 [ext_resource type="Texture2D" uid="uid://dbsrr1m6i042q" path="res://Brewing Stations Sprites/book_arrow_final_pointing_left.png" id="16_n8gw7"]
 [ext_resource type="Script" uid="uid://ubfg181nb00f" path="res://Scenes/kitchen_timer.gd" id="16_th3l3"]
+[ext_resource type="Script" uid="uid://cwi0py2attgra" path="res://Scripts/stash_spot.gd" id="17_kjilo"]
+[ext_resource type="Texture2D" uid="uid://o1e7yq5wf477" path="res://Brewing Stations Sprites/Bag_Picture_Temp.png" id="17_n8gw7"]
+[ext_resource type="Texture2D" uid="uid://dv5vwo5cr8n0a" path="res://Brewing Stations Sprites/ingredient_box_final.png" id="18_wpu4e"]
 
 [node name="Node2D" type="Node2D" unique_id=1956303759]
 
@@ -37,14 +40,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
-
-[node name="Ingredient Box" type="HBoxContainer" parent="CanvasLayer/Cooking Game" unique_id=492470450]
-layout_mode = 0
-offset_left = 67.0
-offset_top = 847.0
-offset_right = 795.0
-offset_bottom = 1036.0
-script = ExtResource("3_t2sl4")
 
 [node name="Cutting Board" type="TextureRect" parent="CanvasLayer/Cooking Game" unique_id=600312282]
 layout_mode = 0
@@ -200,6 +195,62 @@ ignore_texture_size = true
 stretch_mode = 5
 
 [node name="SnatchSound" type="AudioStreamPlayer" parent="CanvasLayer/Cooking Game/RecipeBook" unique_id=2137439726]
+
+[node name="StashSpot" type="TextureRect" parent="CanvasLayer/Cooking Game" unique_id=2078734392]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.07300001
+anchor_top = 0.13000001
+anchor_right = 0.07300001
+anchor_bottom = 0.13000001
+offset_left = 826.83997
+offset_top = 651.6
+offset_right = 974.83997
+offset_bottom = 762.6
+texture = ExtResource("17_n8gw7")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("17_kjilo")
+
+[node name="StashedItems" type="HBoxContainer" parent="CanvasLayer/Cooking Game/StashSpot" unique_id=1305836350]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.1800001
+anchor_right = 0.5
+anchor_bottom = 1.1800001
+offset_left = -71.0
+offset_top = -18.980011
+offset_right = 73.0
+offset_bottom = 33.01999
+
+[node name="WoodBox" type="TextureRect" parent="CanvasLayer/Cooking Game" unique_id=1032285389]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -575.5
+offset_top = -209.0
+offset_right = 575.5
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("18_wpu4e")
+
+[node name="Ingredient Box" type="HBoxContainer" parent="CanvasLayer/Cooking Game/WoodBox" unique_id=492470450]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48000002
+anchor_top = 0.68700004
+anchor_right = 0.48000002
+anchor_bottom = 0.68700004
+offset_left = -438.98004
+offset_top = -88.58301
+offset_right = 465.01996
+offset_bottom = 100.41699
+script = ExtResource("3_t2sl4")
 
 [node name="Grandma" type="CanvasLayer" parent="." unique_id=903420290]
 script = ExtResource("13_vo3np")

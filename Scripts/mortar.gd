@@ -52,6 +52,9 @@ func can_accept(data: Dictionary) -> bool:
 ## Puts the ingredient in the mortar, then opens the minigame.
 ## call_deferred waits until the drag has fully finished first.
 func on_drop(data: Dictionary) -> void:
+	# Dropping Wolfs Bane in while Grandma watches: caught.
+	if GameManager.check_caught_with(data["name"]):
+		return
 	_item_name = data["name"]
 	_ground = false
 	item_in_mortar.texture = Ingredient.get_texture(_item_name)
@@ -81,6 +84,9 @@ func _open_minigame() -> void:
 func _on_minigame_finished(layer: CanvasLayer) -> void:
 	layer.queue_free()
 	_minigame_open = false
+	# Finishing the grinding while Grandma watches: caught.
+	if GameManager.check_caught_with(_item_name):
+		return
 	_ground = true
 
 	_item_name = POWDERS[_item_name]

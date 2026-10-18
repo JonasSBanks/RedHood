@@ -47,6 +47,7 @@ scale = Vector2(5, 5)
 theme_override_constants/icon_max_width = 17
 theme_override_icons/icon = ExtResource("2_mb32j")
 script = ExtResource("3_6bvld")
+ingredient_name = "Wolfs Bane"
 
 [node name="CheckBoxMushroom" type="CheckBox" parent="CanvasLayer/Control" unique_id=2037488740]
 layout_mode = 0
@@ -82,7 +83,6 @@ scale = Vector2(5, 5)
 theme_override_constants/icon_max_width = 17
 theme_override_icons/icon = ExtResource("8_hjep5")
 script = ExtResource("3_6bvld")
-ingredient_name = "Butterfly"
 
 [node name="CheckBoxFruit" type="CheckBox" parent="CanvasLayer/Control" unique_id=394912987]
 layout_mode = 0

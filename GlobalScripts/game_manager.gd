@@ -15,6 +15,8 @@ var pocket = {
 
 # Tracks the keys of the ingredients the player has selected
 var selected_ingredients: Array[String] = []
+## The most ingredients the player can bring into the kitchen at once.
+const MAX_SELECTED := 5
 
 var current_recipe = {
 	"Wolfs Bane": 0,
@@ -109,6 +111,18 @@ var grandma_in_room: bool = false
 ## Seconds left on the kitchen clock (0 outside the kitchen). Set by kitchen_timer.gd.
 var kitchen_time_left: float = 0.0
 
+## Ingredients stashed in the kitchen to keep for tomorrow (one entry per item).
+## They go back into the pocket when the next day starts (see start_day).
+var stash: Array[String] = []
+## The most items the stash can hold.
+const MAX_STASH := 4
+
+## What happens to pocket items the player never brought into the kitchen:
+##   true  - they stay in the pocket for the next day
+##   false - they're thrown away too; only stashed items survive
+## (Ignored while USE_TEST_REFILL is on, since the refill replaces the pocket.)
+const KEEP_UNUSED_POCKET := false
+
 
 ## ===== DAY RULES =====
 
@@ -143,6 +157,43 @@ var _last_outcome: Outcome = Outcome.GOOD
 var _day_played: int = 1       # the day that just ended (for picking its hint)
 var _showing_hint := false     # true while a hint scene is playing
 var _in_cutscene := false      # true from the end of a day until the next day starts
+
+
+## The Wolfs Bane items Grandma must never see being used.
+const WOLFSBANE_ITEMS := ["Wolfs Bane", "Wolfsbane Powder"]
+
+
+## Call this at a moment that counts as "using Wolfs Bane" (dropping it in the
+## mortar, finishing the grinding, dropping the powder in the cauldron).
+## If Grandma is in the room it ends the day as CAUGHT and returns true,
+## so the caller knows to stop what it was doing.
+func check_caught_with(item_name: String) -> bool:
+	if grandma_in_room and item_name in WOLFSBANE_ITEMS:
+		print("CAUGHT using ", item_name, " in front of Grandma!")  # for testing
+		end_day(Outcome.CAUGHT)
+		return true
+	return false
+
+
+## Puts every stashed ingredient back into the pocket, then empties the stash.
+func _return_stash_to_pocket() -> void:
+	if stash.is_empty():
+		return
+	for item_name in stash:
+		pocket[item_name] = pocket.get(item_name, 0) + 1
+	print("Stash returned to pocket: ", stash, ". Pocket now: ", pocket)  # for testing
+	stash.clear()
+
+
+## True when the stash can't take any more.
+func is_stash_full() -> bool:
+	return stash.size() >= MAX_STASH
+
+
+## Saves an ingredient to keep for tomorrow. Called by the stash spot.
+func stash_item(item_name: String) -> void:
+	stash.append(item_name)
+	print("Stashed ", item_name, ". Stash now: ", stash)  # for testing
 
 
 ## Call this when Start Cooking is pressed, before switching to the kitchen.
@@ -194,13 +245,20 @@ func cutscene_finished() -> void:
 	start_day()
 
 
-## Starts a day (new or restarted). Ingredients brought into the kitchen
-## yesterday are gone. (The stash will hook in here in steps 12-13.)
+## Starts a day (new or restarted).
+##   - Ingredients brought into the kitchen yesterday are gone (they were
+##     taken out of the pocket when Start Cooking was pressed).
+##   - Stashed ingredients go back into the pocket.
+##   - Everything else in the pocket is cleared (see KEEP_UNUSED_POCKET),
+##     so only stashed ingredients survive to the next day.
 func start_day() -> void:
 	_in_cutscene = false
 	selected_ingredients.clear()
 	if USE_TEST_REFILL:
 		pocket = TEST_POCKET.duplicate()
+	elif not KEEP_UNUSED_POCKET:
+		pocket.clear()
+	_return_stash_to_pocket()
 	print("Starting day ", day, " with rules: ", today_rules())  # for testing
 	get_tree().change_scene_to_file(DAY_START_SCENE)
 
@@ -222,11 +280,12 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if _debug_label:
-		_debug_label.text = "Day %d  |  Page 2 read: %s  |  Grandma: %s  |  Time: %s" % [
+		_debug_label.text = "Day %d  |  Page 2 read: %s  |  Grandma: %s  |  Time: %s  |  Stash: %d" % [
 			day,
 			"yes" if has_read_page_2 else "no",
 			"IN THE ROOM" if grandma_in_room else "out",
 			"%ds" % ceili(kitchen_time_left) if kitchen_time_left > 0.0 else "-",
+			stash.size(),
 		]
 
 
@@ -256,4 +315,5 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Ctrl + I: print the current state
 	elif event.ctrl_pressed and event.keycode == KEY_I:
 		print("TEST STATE  day: ", day, "  page 2 read: ", has_read_page_2,
-			"\n  pocket: ", pocket, "\n  selected: ", selected_ingredients)
+			"\n  pocket: ", pocket, "\n  selected: ", selected_ingredients,
+			"\n  stash: ", stash)

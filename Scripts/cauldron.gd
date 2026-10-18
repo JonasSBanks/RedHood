@@ -72,6 +72,9 @@ func can_accept(data: Dictionary) -> bool:
 
 
 func on_drop(data: Dictionary) -> void:
+	# Dropping Wolfsbane Powder in while Grandma watches: caught.
+	if GameManager.check_caught_with(data["name"]):
+		return
 	add_ingredient(data["name"])
 
 
