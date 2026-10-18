@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://d2h0mfx7827b5" path="res://Scenes/grinding_minigame.tscn" id="8_digll"]
 [ext_resource type="Texture2D" uid="uid://bfu2jpvec0xln" path="res://Brewing Stations Sprites/cauldron_good_final.png" id="11_6rl12"]
 [ext_resource type="Script" uid="uid://bhmq0voqhitoq" path="res://Scripts/cauldron.gd" id="12_f2n2i"]
+[ext_resource type="AudioStream" uid="uid://daij0o3jeannf" path="res://Brewing Stations Sprites/Squeeze_Sound.mp3" id="12_r1twu"]
 [ext_resource type="Script" uid="uid://dyfekjrtyp5un" path="res://Scenes/recipe_book.gd" id="13_bap62"]
 [ext_resource type="Script" uid="uid://bdcp6pfak02a5" path="res://Scripts/squeeze_spot.gd" id="13_f2n2i"]
 [ext_resource type="PackedScene" uid="uid://clawpro7xyr2i" path="res://Scenes/boiling_minigame.tscn" id="13_th3l3"]
@@ -24,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://o1e7yq5wf477" path="res://Brewing Stations Sprites/Bag_Picture_Temp.png" id="17_n8gw7"]
 [ext_resource type="Texture2D" uid="uid://dv5vwo5cr8n0a" path="res://Brewing Stations Sprites/ingredient_box_final.png" id="18_wpu4e"]
 [ext_resource type="Texture2D" uid="uid://du2lj4fu3gb15" path="res://Brewing Stations Sprites/knife_final.png" id="20_qfxda"]
+[ext_resource type="Texture2D" uid="uid://xs7dnl8hypve" path="res://Brewing Stations Sprites/pestle_final.png" id="21_2rn5v"]
 
 [node name="Node2D" type="Node2D" unique_id=1956303759]
 
@@ -122,6 +124,8 @@ offset_right = 245.59998
 offset_bottom = 126.799995
 script = ExtResource("13_f2n2i")
 cauldron = NodePath("../Cauldron")
+squeeze_sound = ExtResource("12_r1twu")
+pour_sound = ExtResource("12_r1twu")
 
 [node name="SqueezeItem" type="TextureRect" parent="CanvasLayer/Cooking Game/SqueezeSpot" unique_id=1650193370]
 layout_mode = 1
@@ -270,6 +274,22 @@ offset_right = 122.839966
 offset_bottom = 121.27997
 mouse_filter = 2
 texture = ExtResource("20_qfxda")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Cooking Game" unique_id=1096860407]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.56100005
+anchor_top = 0.582
+anchor_right = 0.56100005
+anchor_bottom = 0.582
+offset_left = -96.12012
+offset_top = -124.56
+offset_right = 97.87988
+offset_bottom = 125.44
+mouse_filter = 2
+texture = ExtResource("21_2rn5v")
 expand_mode = 1
 stretch_mode = 5
 

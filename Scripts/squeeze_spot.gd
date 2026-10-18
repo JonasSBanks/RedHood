@@ -24,10 +24,19 @@ const POUR_PICTURES := {
 ## How far down it drips toward the cauldron, in pixels.
 @export var drip_distance: float = 80.0
 
+@export_group("Sounds")
+## Plays on each squish. Drag a sound file here (optional).
+@export var squeeze_sound: AudioStream
+## Plays once when it pours/drips into the cauldron (optional).
+@export var pour_sound: AudioStream
+## Each squish's pitch varies a little so they don't sound identical.
+@export var pitch_variation: float = 0.1
+
 @onready var squeeze_item: TextureRect = $SqueezeItem
 
 var _busy := false  # true while an item is being squeezed
 var _item_start_position: Vector2
+var _sound_player: AudioStreamPlayer
 
 
 func _ready() -> void:
@@ -35,6 +44,8 @@ func _ready() -> void:
 	squeeze_item.mouse_filter = Control.MOUSE_FILTER_IGNORE  # don't block drops
 	squeeze_item.texture = null
 	_item_start_position = squeeze_item.position
+	_sound_player = AudioStreamPlayer.new()
+	add_child(_sound_player)
 	# If the cauldron lit up because of a hand-off from here, un-light it
 	# when the mouse leaves the spot.
 	mouse_exited.connect(func(): if cauldron: cauldron._clear_highlight())
@@ -87,9 +98,10 @@ func _squeeze(item_name: String) -> void:
 	squeeze_item.modulate.a = 1.0
 	squeeze_item.pivot_offset = squeeze_item.size / 2.0
 
-	# Squish it a few times.
+	# Squish it a few times, with a squeeze sound on each squish.
 	var t := create_tween()
 	for i in squeezes:
+		t.tween_callback(_play.bind(squeeze_sound, true))
 		t.tween_property(squeeze_item, "scale", Vector2(1.25, 0.7), 0.12)
 		t.tween_property(squeeze_item, "scale", Vector2.ONE, 0.12)
 	await t.finished
@@ -101,6 +113,7 @@ func _squeeze(item_name: String) -> void:
 		await get_tree().create_timer(0.4).timeout  # hold it so the player sees it
 
 	# Then it drips down toward the cauldron while fading out.
+	_play(pour_sound, false)
 	t = create_tween().set_parallel(true)
 	t.tween_property(squeeze_item, "position:y", _item_start_position.y + drip_distance, 0.4)
 	t.tween_property(squeeze_item, "scale", Vector2(0.3, 0.3), 0.4)
@@ -114,3 +127,12 @@ func _squeeze(item_name: String) -> void:
 	squeeze_item.modulate.a = 1.0
 	cauldron.add_ingredient(item_name)
 	_busy = false
+
+
+## Plays a sound if one is set. vary_pitch makes repeats sound less identical.
+func _play(sound: AudioStream, vary_pitch: bool) -> void:
+	if not sound:
+		return
+	_sound_player.stream = sound
+	_sound_player.pitch_scale = randf_range(1.0 - pitch_variation, 1.0 + pitch_variation) if vary_pitch else 1.0
+	_sound_player.play()
