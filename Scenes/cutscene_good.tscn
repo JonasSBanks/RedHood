@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://nxbbxggpdu6p"]
+
+[ext_resource type="Script" uid="uid://cmrce0dh7lkdd" path="res://Scripts/cutscene.gd" id="1_63nwm"]
+[ext_resource type="Script" uid="uid://cpxoecq8vtw3u" path="res://Scripts/cutscene_slide.gd" id="2_24vfg"]
+[ext_resource type="Texture2D" uid="uid://bxk2cmwdnbhps" path="res://Cutscene_Sprites/kitchen_background.png" id="3_rb7sg"]
+[ext_resource type="Script" uid="uid://conpdct8j3yap" path="res://Scripts/cutscene_frames.gd" id="4_xc7g7"]
+[ext_resource type="Texture2D" uid="uid://d2bin045xsajk" path="res://Cutscene_Sprites/grandma_right_sprite.png" id="5_rb7sg"]
+[ext_resource type="Texture2D" uid="uid://5if36m5witax" path="res://Cutscene_Sprites/grandma_sipping_sprite.png" id="6_fnogd"]
+[ext_resource type="Texture2D" uid="uid://bejeq8vvo3evs" path="res://Cutscene_Sprites/grandma_sipping_sprite_squish.png" id="7_4o1g2"]
+[ext_resource type="Texture2D" uid="uid://7uw4bs1yjwly" path="res://Cutscene_Sprites/grandma_front_sprite.png" id="7_kyoyo"]
+[ext_resource type="Texture2D" uid="uid://cd1or6muu4hkv" path="res://Cutscene_Sprites/daniel_left_sprite.png" id="9_mroip"]
+
+[node name="CutsceneGood" type="Control" unique_id=233740303]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_63nwm")
+
+[node name="Slide1" type="Control" parent="." unique_id=1433846809]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_24vfg")
+speaker = "Grandma"
+text = "Good job, that was delicious!"
+
+[node name="BackGround" type="TextureRect" parent="Slide1" unique_id=906072079]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_rb7sg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Grandma" type="TextureRect" parent="Slide1/BackGround" unique_id=1133189263]
+layout_mode = 0
+offset_left = 332.0
+offset_top = 470.0
+offset_right = 568.0
+offset_bottom = 742.0
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("4_xc7g7")
+frames = Array[Texture2D]([ExtResource("5_rb7sg"), ExtResource("5_rb7sg"), ExtResource("6_fnogd"), ExtResource("7_4o1g2"), ExtResource("6_fnogd"), ExtResource("7_4o1g2"), ExtResource("7_kyoyo")])
+keep_jumping = true
+
+[node name="Red" type="TextureRect" parent="Slide1/BackGround" unique_id=673254868]
+layout_mode = 0
+offset_left = 689.0
+offset_top = 496.0
+offset_right = 827.0
+offset_bottom = 710.0
+texture = ExtResource("9_mroip")

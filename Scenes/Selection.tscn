@@ -1,0 +1,232 @@
+[gd_scene format=3 uid="uid://bnxl72prbqrtg"]
+
+[ext_resource type="Texture2D" uid="uid://mj7vijtssq2t" path="res://Brewing Stations Sprites/brown2.png" id="1_taeup"]
+[ext_resource type="Texture2D" uid="uid://b3qvpyq30y27a" path="res://Brewing Stations Sprites/wolfsbane_v1.png" id="2_mb32j"]
+[ext_resource type="Script" uid="uid://chapprpe60u8r" path="res://Scripts/ingredient_checkbox.gd" id="3_6bvld"]
+[ext_resource type="Texture2D" uid="uid://1cynpytdij5b" path="res://Brewing Stations Sprites/mushroom_v1.png" id="4_3mvp1"]
+[ext_resource type="Texture2D" uid="uid://bjo6s1i0akvvk" path="res://Brewing Stations Sprites/honey_v1.png" id="6_yk5nb"]
+[ext_resource type="Texture2D" uid="uid://b2vmqhs7vgr7a" path="res://Brewing Stations Sprites/butterfly_v1.png" id="8_hjep5"]
+[ext_resource type="Script" uid="uid://bsf8qxabd2cfx" path="res://Scripts/selection_style.gd" id="9_twvux"]
+[ext_resource type="Texture2D" uid="uid://c3qn5motktpcc" path="res://Brewing Stations Sprites/plum_v1.png" id="10_krind"]
+[ext_resource type="AudioStream" uid="uid://pi4xxsmy1mge" path="res://Brewing Stations Sprites/Poo_sound.mp3" id="10_taeup"]
+[ext_resource type="Script" uid="uid://nb313ntyxd5p" path="res://Scripts/button.gd" id="12_3hlh8"]
+
+[node name="Node2D" type="Node2D" unique_id=1426711300]
+
+[node name="background" type="Sprite2D" parent="." unique_id=1433611006]
+texture = ExtResource("1_taeup")
+centered = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=575629904]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=938521724]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CheckBoxWolfsbane" type="CheckBox" parent="CanvasLayer/Control" unique_id=85609992]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.18333334
+anchor_top = 0.09907407
+anchor_right = 0.18333334
+anchor_bottom = 0.09907407
+offset_right = 45.000004
+offset_bottom = 47.20285
+scale = Vector2(5, 5)
+theme_override_constants/icon_max_width = 17
+theme_override_icons/icon = ExtResource("2_mb32j")
+script = ExtResource("3_6bvld")
+ingredient_name = "Wolfs Bane"
+icon_size = Vector2(150, 150)
+metadata/_edit_use_anchors_ = true
+
+[node name="CheckBoxMushroom" type="CheckBox" parent="CanvasLayer/Control" unique_id=2037488740]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7447917
+anchor_top = 0.09907407
+anchor_right = 0.7447917
+anchor_bottom = 0.09907407
+offset_left = -45.0
+offset_bottom = 35.799927
+grow_horizontal = 0
+scale = Vector2(5, 5)
+theme_override_constants/icon_max_width = 17
+theme_override_icons/icon = ExtResource("4_3mvp1")
+script = ExtResource("3_6bvld")
+ingredient_name = "Mushroom"
+icon_size = Vector2(150, 150)
+metadata/_edit_use_anchors_ = true
+
+[node name="CheckBoxHoney" type="CheckBox" parent="CanvasLayer/Control" unique_id=1689964128]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.18697916
+anchor_top = 0.38944578
+anchor_right = 0.18697916
+anchor_bottom = 0.38944578
+offset_top = -23.60144
+offset_right = 45.0
+offset_bottom = 23.60144
+grow_vertical = 2
+scale = Vector2(5, 5)
+theme_override_constants/icon_max_width = 17
+theme_override_icons/icon = ExtResource("6_yk5nb")
+script = ExtResource("3_6bvld")
+ingredient_name = "Honey"
+icon_size = Vector2(150, 150)
+metadata/_edit_use_anchors_ = true
+
+[node name="CheckBoxButterfly" type="CheckBox" parent="CanvasLayer/Control" unique_id=1674262057]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7484375
+anchor_top = 0.38944578
+anchor_right = 0.7484375
+anchor_bottom = 0.38944578
+offset_left = -45.0
+offset_top = -17.899963
+offset_bottom = 17.899963
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(5, 5)
+theme_override_constants/icon_max_width = 17
+theme_override_icons/icon = ExtResource("8_hjep5")
+script = ExtResource("3_6bvld")
+icon_size = Vector2(150, 150)
+metadata/_edit_use_anchors_ = true
+
+[node name="CheckBoxFruit" type="CheckBox" parent="CanvasLayer/Control" unique_id=394912987]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4666667
+anchor_top = 0.63592595
+anchor_right = 0.4666667
+anchor_bottom = 0.63592595
+offset_left = -22.5
+offset_top = -35.80005
+offset_right = 22.5
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(5, 5)
+theme_override_constants/icon_max_width = 17
+theme_override_icons/icon = ExtResource("10_krind")
+script = ExtResource("3_6bvld")
+ingredient_name = "Fruit"
+icon_size = Vector2(150, 150)
+metadata/_edit_use_anchors_ = true
+
+[node name="CheckBoxBadButterfly" type="CheckBox" parent="CanvasLayer/Control" unique_id=1198264059]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46875003
+anchor_top = 0.38296428
+anchor_right = 0.46875003
+anchor_bottom = 0.38296428
+offset_left = -22.5
+offset_top = -17.900024
+offset_right = 22.5
+offset_bottom = 17.900024
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5, 5)
+theme_override_constants/icon_max_width = 17
+theme_override_icons/icon = ExtResource("10_krind")
+script = ExtResource("3_6bvld")
+ingredient_name = "Bad Butterfly"
+icon_size = Vector2(150, 150)
+metadata/_edit_use_anchors_ = true
+
+[node name="CheckBoxBadMushroom" type="CheckBox" parent="CanvasLayer/Control" unique_id=1813618716]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4651042
+anchor_top = 0.09259259
+anchor_right = 0.4651042
+anchor_bottom = 0.09259259
+offset_left = -22.5
+offset_right = 22.5
+offset_bottom = 35.799988
+grow_horizontal = 2
+scale = Vector2(5, 5)
+theme_override_constants/icon_max_width = 17
+theme_override_icons/icon = ExtResource("10_krind")
+script = ExtResource("3_6bvld")
+ingredient_name = "Bad Mushroom"
+icon_size = Vector2(150, 150)
+metadata/_edit_use_anchors_ = true
+
+[node name="CheckBoxBadHoney" type="CheckBox" parent="CanvasLayer/Control" unique_id=1793854699]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.74635416
+anchor_top = 0.6424075
+anchor_right = 0.74635416
+anchor_bottom = 0.6424075
+offset_left = -45.0
+offset_top = -35.80005
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(5, 5)
+theme_override_constants/icon_max_width = 17
+theme_override_icons/icon = ExtResource("10_krind")
+script = ExtResource("3_6bvld")
+ingredient_name = "Bad Honey"
+icon_size = Vector2(150, 150)
+metadata/_edit_use_anchors_ = true
+
+[node name="CheckBoxFermentedFruit" type="CheckBox" parent="CanvasLayer/Control" unique_id=1859687383]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.18489583
+anchor_top = 0.6424075
+anchor_right = 0.18489583
+anchor_bottom = 0.6424075
+offset_top = -35.80005
+offset_right = 45.0
+grow_vertical = 0
+scale = Vector2(5, 5)
+theme_override_constants/icon_max_width = 17
+theme_override_icons/icon = ExtResource("10_krind")
+script = ExtResource("3_6bvld")
+ingredient_name = "Fermented Fruit"
+icon_size = Vector2(150, 150)
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="CanvasLayer/Control" unique_id=2143707841]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 311.0
+offset_top = -158.0
+offset_right = -245.0
+offset_bottom = -63.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 60
+text = "Start"
+script = ExtResource("12_3hlh8")
+
+[node name="SelectionStyle" type="Node" parent="." unique_id=1203637718 node_paths=PackedStringArray("start_button")]
+script = ExtResource("9_twvux")
+start_button = NodePath("../CanvasLayer/Control/Button")
+pick_sound = ExtResource("10_taeup")
+unpick_sound = ExtResource("10_taeup")
+start_sound = ExtResource("10_taeup")
+
+[connection signal="toggled" from="CanvasLayer/Control/CheckBoxWolfsbane" to="CanvasLayer/Control/CheckBoxWolfsbane" method="_on_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/CheckBoxMushroom" to="CanvasLayer/Control/CheckBoxMushroom" method="_on_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/CheckBoxHoney" to="CanvasLayer/Control/CheckBoxHoney" method="_on_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/CheckBoxButterfly" to="CanvasLayer/Control/CheckBoxButterfly" method="_on_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/CheckBoxFruit" to="CanvasLayer/Control/CheckBoxFruit" method="_on_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/CheckBoxBadButterfly" to="CanvasLayer/Control/CheckBoxBadButterfly" method="_on_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/CheckBoxBadMushroom" to="CanvasLayer/Control/CheckBoxBadMushroom" method="_on_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/CheckBoxBadHoney" to="CanvasLayer/Control/CheckBoxBadHoney" method="_on_toggled"]
+[connection signal="toggled" from="CanvasLayer/Control/CheckBoxFermentedFruit" to="CanvasLayer/Control/CheckBoxFermentedFruit" method="_on_toggled"]

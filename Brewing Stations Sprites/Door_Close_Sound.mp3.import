@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://64w7mrgwk8fl"
+path="res://.godot/imported/Door_Close_Sound.mp3-dd96b41a6a4a1756bff4c84c37d84b92.mp3str"
+
+[deps]
+
+source_file="res://Brewing Stations Sprites/Door_Close_Sound.mp3"
+dest_files=["res://.godot/imported/Door_Close_Sound.mp3-dd96b41a6a4a1756bff4c84c37d84b92.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

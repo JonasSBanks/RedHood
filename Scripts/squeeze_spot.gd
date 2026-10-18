@@ -1,0 +1,138 @@
+extends DropTarget
+## The squeeze spot above the cauldron. Drop Honey or Fruit (good or bad) here: it squishes
+## a few times, switches to its pouring/squeezed picture, drips down, and goes
+## into the cauldron.
+##
+## Anything else dropped here is passed straight to the cauldron, as if the
+## spot weren't there.
+##
+## This node is a TextureRect with no texture (an invisible drop zone).
+## Give it a size in the Inspector so it has an area to drop on.
+## Needs a child TextureRect called SqueezeItem to show the item being squeezed.
+
+## The cauldron this spot drips into. Drag your Cauldron node into this slot.
+@export var cauldron: Node
+## Item -> picture shown after the squishes, while it drips (no folder, no .png).
+const POUR_PICTURES := {
+	"Honey": "honey_pour_good_final",
+	"Bad Honey": "honey_pour_bad_final",
+	"Fruit": "plum_juiced_final",
+	"Fermented Fruit": "plum_juiced_fermented_final",
+}
+## How many squishes before it pours.
+@export var squeezes: int = 3
+## How far down it drips toward the cauldron, in pixels.
+@export var drip_distance: float = 80.0
+
+@export_group("Sounds")
+## Plays on each squish. Drag a sound file here (optional).
+@export var squeeze_sound: AudioStream
+## Plays once when it pours/drips into the cauldron (optional).
+@export var pour_sound: AudioStream
+## Each squish's pitch varies a little so they don't sound identical.
+@export var pitch_variation: float = 0.1
+
+@onready var squeeze_item: TextureRect = $SqueezeItem
+
+var _busy := false  # true while an item is being squeezed
+var _item_start_position: Vector2
+var _sound_player: AudioStreamPlayer
+
+
+func _ready() -> void:
+	super()  # runs DropTarget's _ready too
+	squeeze_item.mouse_filter = Control.MOUSE_FILTER_IGNORE  # don't block drops
+	squeeze_item.texture = null
+	_item_start_position = squeeze_item.position
+	_sound_player = AudioStreamPlayer.new()
+	add_child(_sound_player)
+	# If the cauldron lit up because of a hand-off from here, un-light it
+	# when the mouse leaves the spot.
+	mouse_exited.connect(func(): if cauldron: cauldron._clear_highlight())
+
+
+## True for Honey and Fruit.
+func _is_squeezable(data: Variant) -> bool:
+	return data is Dictionary \
+		and data.get("type") == "ingredient" \
+		and cauldron != null \
+		and data["name"] in cauldron.SQUEEZE_ONLY
+
+
+## Honey/Fruit: the spot's own check (below). Anything else: ask the cauldron.
+func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
+	if cauldron != null and data is Dictionary and not _is_squeezable(data):
+		modulate = Color.WHITE
+		return cauldron._can_drop_data(at_position, data)
+	return super(at_position, data)
+
+
+## Honey/Fruit: squeeze here. Anything else: drop it into the cauldron.
+func _drop_data(at_position: Vector2, data: Variant) -> void:
+	if not _is_squeezable(data):
+		cauldron._drop_data(at_position, data)
+		return
+	super(at_position, data)
+
+
+## Only when not already squeezing, and only if the cauldron still has room.
+func can_accept(_data: Dictionary) -> bool:
+	if cauldron == null:
+		push_error("SqueezeSpot: drag the Cauldron node into the Cauldron slot in the Inspector.")
+		return false
+	return not _busy and not cauldron.is_full()
+
+
+func on_drop(data: Dictionary) -> void:
+	_squeeze(data["name"])
+
+
+## Plays the squeeze, then adds the item to the cauldron.
+func _squeeze(item_name: String) -> void:
+	_busy = true
+
+	# Show the whole item at its starting spot.
+	squeeze_item.texture = Ingredient.get_texture(item_name)
+	squeeze_item.position = _item_start_position
+	squeeze_item.scale = Vector2.ONE
+	squeeze_item.modulate.a = 1.0
+	squeeze_item.pivot_offset = squeeze_item.size / 2.0
+
+	# Squish it a few times, with a squeeze sound on each squish.
+	var t := create_tween()
+	for i in squeezes:
+		t.tween_callback(_play.bind(squeeze_sound, true))
+		t.tween_property(squeeze_item, "scale", Vector2(1.25, 0.7), 0.12)
+		t.tween_property(squeeze_item, "scale", Vector2.ONE, 0.12)
+	await t.finished
+
+	# Switch to the pouring honey / squeezed fruit picture, if one is set.
+	var pour_texture := Ingredient.load_sprite(POUR_PICTURES.get(item_name, ""))
+	if pour_texture:
+		squeeze_item.texture = pour_texture
+		await get_tree().create_timer(0.4).timeout  # hold it so the player sees it
+
+	# Then it drips down toward the cauldron while fading out.
+	_play(pour_sound, false)
+	t = create_tween().set_parallel(true)
+	t.tween_property(squeeze_item, "position:y", _item_start_position.y + drip_distance, 0.4)
+	t.tween_property(squeeze_item, "scale", Vector2(0.3, 0.3), 0.4)
+	t.tween_property(squeeze_item, "modulate:a", 0.0, 0.4)
+	await t.finished
+
+	# Reset the picture and put the item in the cauldron.
+	squeeze_item.texture = null
+	squeeze_item.position = _item_start_position
+	squeeze_item.scale = Vector2.ONE
+	squeeze_item.modulate.a = 1.0
+	cauldron.add_ingredient(item_name)
+	_busy = false
+
+
+## Plays a sound if one is set. vary_pitch makes repeats sound less identical.
+func _play(sound: AudioStream, vary_pitch: bool) -> void:
+	if not sound:
+		return
+	_sound_player.stream = sound
+	_sound_player.pitch_scale = randf_range(1.0 - pitch_variation, 1.0 + pitch_variation) if vary_pitch else 1.0
+	_sound_player.play()

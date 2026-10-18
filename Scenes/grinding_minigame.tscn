@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://d2h0mfx7827b5"]
+
+[ext_resource type="Script" uid="uid://t2dgyby76b1d" path="res://Scripts/grinding_minigame.gd" id="1_sncq0"]
+[ext_resource type="Texture2D" uid="uid://c71r2kdqf6cpm" path="res://Brewing Stations Sprites/mortar_final.png" id="2_8600y"]
+[ext_resource type="AudioStream" uid="uid://bm168nye64xb6" path="res://Brewing Stations Sprites/Grinding_Sound.mp3" id="2_fef3g"]
+
+[node name="GrindingMinigame" type="Control" unique_id=1168416465]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sncq0")
+pestle_size = Vector2(150, 150)
+grind_sound = ExtResource("2_fef3g")
+dust_color = Color(0.26986837, 0.21671048, 0.15164375, 1)
+dust_amount = 50
+
+[node name="Background" type="ColorRect" parent="." unique_id=514473643]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.11764706, 0.101960786, 0.08627451, 0.46666667)
+
+[node name="MortarPicture" type="TextureRect" parent="." unique_id=340671944]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -318.0
+offset_top = -291.0
+offset_right = 318.0
+offset_bottom = 291.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8600y")
+
+[node name="ItemPicture" type="TextureRect" parent="." unique_id=1291306174]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.49600002
+anchor_top = 0.388
+anchor_right = 0.49600002
+anchor_bottom = 0.388
+offset_left = -130.32007
+offset_top = -116.04001
+offset_right = 131.67993
+offset_bottom = 115.95999
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Progress" type="ProgressBar" parent="." unique_id=1967109833]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -354.0
+offset_top = -188.0
+offset_right = 354.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Hint" type="Label" parent="." unique_id=337465091]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -279.0
+offset_right = 279.0
+offset_bottom = 137.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 45
