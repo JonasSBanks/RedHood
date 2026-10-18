@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://cfbi38ftpkrfs"]
+
+<<<<<<< Updated upstream
+[ext_resource type="Texture2D" uid="uid://cegd861o1y032" path="res://Scenes/RPGScenes/WorldSprites/grandmaDown.png" id="1_a3avc"]
+[ext_resource type="Script" uid="uid://tjyqhl71rlli" path="res://Scenes/RPGScenes/Characters/wolf.gd" id="1_ek3og"]
+[ext_resource type="Texture2D" uid="uid://bld8tob5q7px1" path="res://Scenes/RPGScenes/WorldSprites/grandmaLeft.png" id="2_ek3og"]
+[ext_resource type="Texture2D" uid="uid://cmq4ppdq7atp7" path="res://Scenes/RPGScenes/WorldSprites/grandmaUp.png" id="3_hurck"]
+[ext_resource type="Texture2D" uid="uid://jl4wx78glrc6" path="res://Scenes/RPGScenes/WorldSprites/grandmaRight.png" id="4_ximrk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p2udq"]
+radius = 45.0
+height = 112.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_68nwu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_a3avc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ek3og")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hurck")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ximrk")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_a3avc")
+}],
+"loop": 1,
+"name": &"grandmaDown",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ek3og")
+}],
+"loop": 1,
+"name": &"grandmaLeft",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ximrk")
+}],
+"loop": 1,
+"name": &"grandmaRight",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_hurck")
+}],
+"loop": 1,
+"name": &"grandmaUp",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=2073737686]
+script = ExtResource("1_ek3og")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1995193510]
+shape = SubResource("CapsuleShape2D_p2udq")
+
+[node name="GrandmaSprites" type="AnimatedSprite2D" parent="CollisionShape2D" unique_id=909000807]
+position = Vector2(-1, -2)
+sprite_frames = SubResource("SpriteFrames_68nwu")
+animation = &"grandmaDown"
+=======
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_68nwu"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=2073737686]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1434179143]
+shape = SubResource("RectangleShape2D_68nwu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D" unique_id=609284014]
+>>>>>>> Stashed changes

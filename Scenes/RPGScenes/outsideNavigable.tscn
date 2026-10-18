@@ -1,0 +1,185 @@
+[gd_scene format=3 uid="uid://dls0iultadfw2"]
+
+[ext_resource type="PackedScene" uid="uid://c34lr5lnxdo16" path="res://Scenes/RPGScenes/Characters/Red.tscn" id="1_p5rfs"]
+<<<<<<< Updated upstream
+[ext_resource type="Texture2D" uid="uid://drdmmibnyhuni" path="res://Scenes/RPGScenes/WorldSprites/forestClearing.png" id="2_7d561"]
+[ext_resource type="PackedScene" uid="uid://cfbi38ftpkrfs" path="res://Scenes/RPGScenes/Characters/Wolf.tscn" id="4_7d561"]
+[ext_resource type="Texture2D" uid="uid://bb1lvm04p4864" path="res://Scenes/RPGScenes/WorldSprites/mainTrees1.png" id="5_tml2b"]
+[ext_resource type="Texture2D" uid="uid://br2j0a7w3cm7i" path="res://Scenes/RPGScenes/WorldSprites/mainTrees2.png" id="6_qdays"]
+[ext_resource type="Texture2D" uid="uid://g6t0x1qscicp" path="res://Scenes/RPGScenes/WorldSprites/SurroundTrees.png" id="6_xrlls"]
+[ext_resource type="Texture2D" uid="uid://bmpnddync85gs" path="res://Scenes/RPGScenes/WorldSprites/mainTrees3.png" id="7_qdays"]
+[ext_resource type="PackedScene" uid="uid://c4ah317sgiwpr" path="res://ForageArea.tscn" id="9_1j8f3"]
+[ext_resource type="PackedScene" uid="uid://cp0elb5ch0ill" path="res://Scenes/RPGScenes/Objects/door.tscn" id="9_opsnf"]
+[ext_resource type="Texture2D" uid="uid://c22jfymd8g2sf" path="res://Scenes/RPGScenes/WorldSprites/tree1.png" id="9_sfpf3"]
+[ext_resource type="PackedScene" uid="uid://b61mdjmg23jw2" path="res://forage_minigame.tscn" id="10_8xmyn"]
+[ext_resource type="Texture2D" uid="uid://bqkssc61w61cu" path="res://Scenes/RPGScenes/ingredientSprite/mushroom_good_final.png" id="11_j2f85"]
+[ext_resource type="Texture2D" uid="uid://wlfft81ipfjc" path="res://Scenes/RPGScenes/ingredientSprite/mushroom_bad_final.png" id="12_4ejb1"]
+=======
+>>>>>>> Stashed changes
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_68nwu"]
+size = Vector2(371, 273)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qaae6"]
+size = Vector2(424, 325)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qaae6"]
+radius = 26.0
+height = 106.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_edtjf"]
+size = Vector2(269, 109)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uc6ji"]
+size = Vector2(1974, 55)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y7mus"]
+size = Vector2(71.5, 1158)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ub0qu"]
+size = Vector2(1983.5, 106.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d6cge"]
+size = Vector2(45, 1110)
+
+[node name="Node2D" type="Node2D" unique_id=1065183325]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1491858225]
+
+[node name="WorldDesign" type="Sprite2D" parent="TileMapLayer" unique_id=2083304295]
+position = Vector2(1, 0)
+texture = ExtResource("2_7d561")
+
+[node name="House" type="StaticBody2D" parent="TileMapLayer" unique_id=1542093674]
+visible = false
+position = Vector2(171, 297)
+
+[node name="Base" type="CollisionShape2D" parent="TileMapLayer/House" unique_id=491839077]
+position = Vector2(-483, -344)
+shape = SubResource("RectangleShape2D_68nwu")
+
+<<<<<<< Updated upstream
+[node name="Roof" type="CollisionShape2D" parent="TileMapLayer/House" unique_id=1803192496]
+position = Vector2(-486, -493)
+shape = SubResource("RectangleShape2D_qaae6")
+
+[node name="Red" parent="TileMapLayer" unique_id=1838147545 instance=ExtResource("1_p5rfs")]
+position = Vector2(-176, 212)
+
+[node name="Camera2D" type="Camera2D" parent="TileMapLayer/Red" unique_id=1996320185]
+zoom = Vector2(2.5, 2.5)
+limit_left = -959
+limit_top = -540
+limit_right = 961
+limit_bottom = 541
+
+[node name="Grandma" parent="TileMapLayer" unique_id=2073737686 instance=ExtResource("4_7d561")]
+position = Vector2(-412, 116)
+
+[node name="TreeBodies" type="StaticBody2D" parent="TileMapLayer" unique_id=973146310]
+position = Vector2(-501, 176)
+
+[node name="BunchTrees1" type="CollisionPolygon2D" parent="TileMapLayer/TreeBodies" unique_id=1201756810]
+position = Vector2(501, -176)
+polygon = PackedVector2Array(-893, -142, -517, -136, -153, -286, -113, -508, -901, -500)
+
+[node name="Tree1" type="Sprite2D" parent="TileMapLayer/TreeBodies" unique_id=1041881805]
+position = Vector2(826, 22)
+texture = ExtResource("5_tml2b")
+
+[node name="Tree2" type="Sprite2D" parent="TileMapLayer/TreeBodies" unique_id=998351901]
+position = Vector2(84, -509)
+texture = ExtResource("6_qdays")
+
+[node name="Tree3" type="Sprite2D" parent="TileMapLayer/TreeBodies" unique_id=1137248532]
+position = Vector2(-237, -154)
+texture = ExtResource("7_qdays")
+
+[node name="Tree4" type="Sprite2D" parent="TileMapLayer/TreeBodies" unique_id=1994238327]
+position = Vector2(1139, -401)
+texture = ExtResource("9_sfpf3")
+
+[node name="TreeBody1" type="CollisionShape2D" parent="TileMapLayer/TreeBodies" unique_id=487498943]
+position = Vector2(-121, 59)
+shape = SubResource("CapsuleShape2D_qaae6")
+
+[node name="TreeBody2" type="CollisionShape2D" parent="TileMapLayer/TreeBodies" unique_id=2032572307]
+position = Vector2(-262, 23)
+shape = SubResource("CapsuleShape2D_qaae6")
+
+[node name="TreeBody3" type="CollisionShape2D" parent="TileMapLayer/TreeBodies" unique_id=973666524]
+position = Vector2(-281, -293)
+shape = SubResource("CapsuleShape2D_qaae6")
+
+[node name="TreeBody4" type="CollisionShape2D" parent="TileMapLayer/TreeBodies" unique_id=726829044]
+position = Vector2(580, 222)
+shape = SubResource("CapsuleShape2D_qaae6")
+
+[node name="TreeBody5" type="CollisionShape2D" parent="TileMapLayer/TreeBodies" unique_id=1269507932]
+position = Vector2(1138, -266)
+shape = SubResource("CapsuleShape2D_qaae6")
+
+[node name="TreeBody6" type="CollisionShape2D" parent="TileMapLayer/TreeBodies" unique_id=1026223907]
+position = Vector2(439, -394)
+shape = SubResource("CapsuleShape2D_qaae6")
+
+[node name="TreeBody7" type="CollisionShape2D" parent="TileMapLayer/TreeBodies" unique_id=1037145820]
+position = Vector2(-317, 96)
+shape = SubResource("CapsuleShape2D_qaae6")
+
+[node name="TreeBody8" type="CollisionShape2D" parent="TileMapLayer/TreeBodies" unique_id=285306856]
+position = Vector2(-131, -272)
+shape = SubResource("CapsuleShape2D_qaae6")
+
+[node name="TreeBody9" type="CollisionShape2D" parent="TileMapLayer/TreeBodies" unique_id=1931231721]
+position = Vector2(-296.5, -108.5)
+shape = SubResource("RectangleShape2D_edtjf")
+
+[node name="BunchTrees2" type="CollisionPolygon2D" parent="TileMapLayer/TreeBodies" unique_id=1179609099]
+position = Vector2(-23, -15)
+polygon = PackedVector2Array(709, 198, 814, 159, 963, 7, 1074, -106, 1245, -184, 1451, -186, 1444, 363, 700, 345)
+
+[node name="SurroundTrees" type="Sprite2D" parent="TileMapLayer" unique_id=2103758175]
+position = Vector2(-3, 206)
+texture = ExtResource("6_xrlls")
+
+[node name="Bounds" type="StaticBody2D" parent="TileMapLayer" unique_id=80750381]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/Bounds" unique_id=1292097362]
+position = Vector2(-15, 512.5)
+shape = SubResource("RectangleShape2D_uc6ji")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="TileMapLayer/Bounds" unique_id=19511065]
+position = Vector2(924.75, -4)
+shape = SubResource("RectangleShape2D_y7mus")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="TileMapLayer/Bounds" unique_id=1503354278]
+position = Vector2(14.25, -486.25)
+shape = SubResource("RectangleShape2D_ub0qu")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="TileMapLayer/Bounds" unique_id=841418928]
+position = Vector2(-938.5, 3)
+shape = SubResource("RectangleShape2D_d6cge")
+
+[node name="mushroomForage" parent="." unique_id=1709972354 instance=ExtResource("9_1j8f3")]
+position = Vector2(-60, -136)
+choice_scene = ExtResource("10_8xmyn")
+good_texture = ExtResource("11_j2f85")
+bad_texture = ExtResource("12_4ejb1")
+interact_action = &"interact"
+player_group = &"Red"
+
+[node name="Sprite2D" type="Sprite2D" parent="mushroomForage" unique_id=1621140696]
+texture = ExtResource("11_j2f85")
+
+[node name="Door" parent="." unique_id=916394868 instance=ExtResource("9_opsnf")]
+position = Vector2(-304, 105)
+target_scene = "uid://dkhmm6wuuq5lw"
+=======
+[node name="WorldDesign" type="Sprite2D" parent="TileMapLayer" unique_id=2083304295]
+
+[node name="CharacterBody2D" parent="." unique_id=1838147545 instance=ExtResource("1_p5rfs")]
+position = Vector2(324, 294)
+>>>>>>> Stashed changes
