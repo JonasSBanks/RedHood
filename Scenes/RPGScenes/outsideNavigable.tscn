@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dls0iultadfw2"]
 
 [ext_resource type="PackedScene" uid="uid://c34lr5lnxdo16" path="res://Scenes/RPGScenes/Characters/Red.tscn" id="1_p5rfs"]
+<<<<<<< Updated upstream
 [ext_resource type="Texture2D" uid="uid://drdmmibnyhuni" path="res://Scenes/RPGScenes/WorldSprites/forestClearing.png" id="2_7d561"]
 [ext_resource type="PackedScene" uid="uid://cfbi38ftpkrfs" path="res://Scenes/RPGScenes/Characters/Wolf.tscn" id="4_7d561"]
 [ext_resource type="Texture2D" uid="uid://bb1lvm04p4864" path="res://Scenes/RPGScenes/WorldSprites/mainTrees1.png" id="5_tml2b"]
@@ -13,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://b61mdjmg23jw2" path="res://forage_minigame.tscn" id="10_8xmyn"]
 [ext_resource type="Texture2D" uid="uid://bqkssc61w61cu" path="res://Scenes/RPGScenes/ingredientSprite/mushroom_good_final.png" id="11_j2f85"]
 [ext_resource type="Texture2D" uid="uid://wlfft81ipfjc" path="res://Scenes/RPGScenes/ingredientSprite/mushroom_bad_final.png" id="12_4ejb1"]
+=======
+>>>>>>> Stashed changes
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_68nwu"]
 size = Vector2(371, 273)
@@ -55,6 +58,7 @@ position = Vector2(171, 297)
 position = Vector2(-483, -344)
 shape = SubResource("RectangleShape2D_68nwu")
 
+<<<<<<< Updated upstream
 [node name="Roof" type="CollisionShape2D" parent="TileMapLayer/House" unique_id=1803192496]
 position = Vector2(-486, -493)
 shape = SubResource("RectangleShape2D_qaae6")
@@ -173,3 +177,9 @@ texture = ExtResource("11_j2f85")
 [node name="Door" parent="." unique_id=916394868 instance=ExtResource("9_opsnf")]
 position = Vector2(-304, 105)
 target_scene = "uid://dkhmm6wuuq5lw"
+=======
+[node name="WorldDesign" type="Sprite2D" parent="TileMapLayer" unique_id=2083304295]
+
+[node name="CharacterBody2D" parent="." unique_id=1838147545 instance=ExtResource("1_p5rfs")]
+position = Vector2(324, 294)
+>>>>>>> Stashed changes

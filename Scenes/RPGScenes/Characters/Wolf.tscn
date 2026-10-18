@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cfbi38ftpkrfs"]
 
+<<<<<<< Updated upstream
 [ext_resource type="Texture2D" uid="uid://cegd861o1y032" path="res://Scenes/RPGScenes/WorldSprites/grandmaDown.png" id="1_a3avc"]
 [ext_resource type="Script" uid="uid://tjyqhl71rlli" path="res://Scenes/RPGScenes/Characters/wolf.gd" id="1_ek3og"]
 [ext_resource type="Texture2D" uid="uid://bld8tob5q7px1" path="res://Scenes/RPGScenes/WorldSprites/grandmaLeft.png" id="2_ek3og"]
@@ -72,3 +73,13 @@ shape = SubResource("CapsuleShape2D_p2udq")
 position = Vector2(-1, -2)
 sprite_frames = SubResource("SpriteFrames_68nwu")
 animation = &"grandmaDown"
+=======
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_68nwu"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=2073737686]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1434179143]
+shape = SubResource("RectangleShape2D_68nwu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D" unique_id=609284014]
+>>>>>>> Stashed changes
