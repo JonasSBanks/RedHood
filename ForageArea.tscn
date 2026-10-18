@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://c4ah317sgiwpr"]
+
+[ext_resource type="Script" uid="uid://b056u7x87c3st" path="res://Scenes/RPGScenes/WorldScripts/forage_spot.gd" id="1_xsdpt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_68nwu"]
+size = Vector2(59, 54)
+
+[node name="Area2D" type="Area2D" unique_id=1709972354]
+script = ExtResource("1_xsdpt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=997154553]
+shape = SubResource("RectangleShape2D_68nwu")

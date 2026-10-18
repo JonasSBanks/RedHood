@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://b6f733tq1djqe"]
+
+[ext_resource type="PackedScene" uid="uid://b61mdjmg23jw2" path="res://forage_minigame.tscn" id="1_mrfkc"]
+
+[node name="ForageMinigame" unique_id=785444902 instance=ExtResource("1_mrfkc")]
