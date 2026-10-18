@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cft5jw6p8koe3"]
+
+[ext_resource type="Script" uid="uid://b2tmc7lbytpsm" path="res://Scenes/RPGScenes/WorldScripts/interact_area.gd" id="1_yyr47"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_68nwu"]
+size = Vector2(72, 49.5)
+
+[node name="interact_area" type="Area2D" unique_id=714599249]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_yyr47")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=771154214]
+shape = SubResource("RectangleShape2D_68nwu")

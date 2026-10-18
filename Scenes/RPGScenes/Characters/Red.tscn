@@ -1,25 +1,104 @@
 [gd_scene format=3 uid="uid://c34lr5lnxdo16"]
 
-[ext_resource type="Texture2D" uid="uid://cj7opx0spixtj" path="res://icon.svg" id="1_jstqq"]
+[ext_resource type="Script" uid="uid://bctw7xqwxgbth" path="res://Scenes/RPGScenes/Characters/red.gd" id="1_p0cqy"]
+[ext_resource type="Texture2D" uid="uid://btn1r50o1lyaf" path="res://Scenes/RPGScenes/WorldSprites/danielDown1.png" id="2_p2udq"]
+[ext_resource type="Texture2D" uid="uid://bh3vuaka4psny" path="res://Scenes/RPGScenes/WorldSprites/danielIdleDown.png" id="3_h1qds"]
+[ext_resource type="Texture2D" uid="uid://cdrej66ddvcgn" path="res://Scenes/RPGScenes/WorldSprites/danielDown2.png" id="4_wkn3o"]
+[ext_resource type="Texture2D" uid="uid://dp8gbb61fvjq6" path="res://Scenes/RPGScenes/WorldSprites/danielLeft1.png" id="5_m5ejf"]
+[ext_resource type="Texture2D" uid="uid://ctdh7wb3u0srm" path="res://Scenes/RPGScenes/WorldSprites/danielIdleLeft.png" id="6_ocnb1"]
+[ext_resource type="Texture2D" uid="uid://dggvqsmnnaj41" path="res://Scenes/RPGScenes/WorldSprites/danielLeft2.png" id="7_tqr1y"]
+[ext_resource type="Texture2D" uid="uid://uqn1fcxh623f" path="res://Scenes/RPGScenes/WorldSprites/danielRight2.png" id="8_iprtf"]
+[ext_resource type="Texture2D" uid="uid://da1jqsjj0sobf" path="res://Scenes/RPGScenes/WorldSprites/danielIdleRight.png" id="9_ujd17"]
+[ext_resource type="Texture2D" uid="uid://br868fdg5hraw" path="res://Scenes/RPGScenes/WorldSprites/danielRight1.png" id="10_apnnc"]
+[ext_resource type="Texture2D" uid="uid://c2uupt22w2dff" path="res://Scenes/RPGScenes/WorldSprites/danielUp1.png" id="11_kcivj"]
+[ext_resource type="Texture2D" uid="uid://c5jp4ruf3fpq1" path="res://Scenes/RPGScenes/WorldSprites/danielIdleUp.png" id="12_fyh6x"]
+[ext_resource type="Texture2D" uid="uid://n1gvqvettal3" path="res://Scenes/RPGScenes/WorldSprites/danielUp2.png" id="13_opfkj"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uc6ji"]
-size = Vector2(129, 127)
+[sub_resource type="CircleShape2D" id="CircleShape2D_xpai1"]
+radius = 19.94
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qaae6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_jstqq")
+"texture": ExtResource("3_h1qds")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_p2udq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_h1qds")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wkn3o")
 }],
 "loop": 1,
-"name": &"default",
-"speed": 5.0
+"name": &"downWalk",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ocnb1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_m5ejf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ocnb1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_tqr1y")
+}],
+"loop": 1,
+"name": &"leftWalk",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_ujd17")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_iprtf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ujd17")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_apnnc")
+}],
+"loop": 1,
+"name": &"rightWalk",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_fyh6x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_kcivj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_fyh6x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_opfkj")
+}],
+"loop": 1,
+"name": &"upWalk",
+"speed": 6.0
 }]
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1838147545]
+collision_mask = 5
+script = ExtResource("1_p0cqy")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1957377172]
-shape = SubResource("RectangleShape2D_uc6ji")
+[node name="PhysicalCollision" type="CollisionShape2D" parent="." unique_id=1957377172]
+shape = SubResource("CircleShape2D_xpai1")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D" unique_id=839994858]
+[node name="PlayerAnimation" type="AnimatedSprite2D" parent="PhysicalCollision" unique_id=839994858]
+position = Vector2(0, -33)
 sprite_frames = SubResource("SpriteFrames_qaae6")
+animation = &"downWalk"
+frame_progress = 0.65209687
+
+[node name="InteractIndicator" type="Sprite2D" parent="." unique_id=282188689]

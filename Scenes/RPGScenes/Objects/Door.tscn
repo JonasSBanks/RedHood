@@ -1,8 +1,18 @@
 [gd_scene format=3 uid="uid://b8wjsb7q687e5"]
 
+[ext_resource type="Texture2D" uid="uid://cj7opx0spixtj" path="res://icon.svg" id="1_r8opr"]
+[ext_resource type="PackedScene" uid="uid://cft5jw6p8koe3" path="res://Scenes/RPGScenes/Objects/interact_area.tscn" id="1_wpsxb"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_68nwu"]
+size = Vector2(128.5, 128.5)
 
 [node name="Door" type="StaticBody2D" unique_id=444860493]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1596656708]
 shape = SubResource("RectangleShape2D_68nwu")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" unique_id=873660807]
+texture = ExtResource("1_r8opr")
+
+[node name="interact_area" parent="." unique_id=714599249 instance=ExtResource("1_wpsxb")]
+position = Vector2(0, 75)

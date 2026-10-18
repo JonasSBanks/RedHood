@@ -1,14 +1,35 @@
 [gd_scene format=3 uid="uid://dls0iultadfw2"]
 
+[ext_resource type="PackedScene" uid="uid://c34lr5lnxdo16" path="res://Scenes/RPGScenes/Characters/Red.tscn" id="1_p5rfs"]
+[ext_resource type="Texture2D" uid="uid://cj7opx0spixtj" path="res://icon.svg" id="2_nt8ah"]
+[ext_resource type="PackedScene" uid="uid://b8wjsb7q687e5" path="res://Scenes/RPGScenes/Objects/Door.tscn" id="2_stl0x"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_68nwu"]
+size = Vector2(469, 438)
 
 [node name="Node2D" type="Node2D" unique_id=1065183325]
+position = Vector2(481, 271)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1491858225]
 
 [node name="House" type="StaticBody2D" parent="TileMapLayer" unique_id=1542093674]
+position = Vector2(362, 410)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/House" unique_id=491839077]
+position = Vector2(121, -268)
 shape = SubResource("RectangleShape2D_68nwu")
 
+[node name="Sprite2D" type="Sprite2D" parent="TileMapLayer/House/CollisionShape2D" unique_id=181599225]
+position = Vector2(-1, -1.0000001)
+scale = Vector2(3.6328125, 3.4375)
+texture = ExtResource("2_nt8ah")
+
 [node name="WorldDesign" type="Sprite2D" parent="TileMapLayer" unique_id=2083304295]
+
+[node name="Door" parent="TileMapLayer" unique_id=444860493 instance=ExtResource("2_stl0x")]
+position = Vector2(483, 306)
+
+[node name="CharacterBody2D" parent="TileMapLayer" unique_id=1838147545 instance=ExtResource("1_p5rfs")]
+position = Vector2(126, 132)
+
+[node name="Camera2D" type="Camera2D" parent="TileMapLayer/CharacterBody2D" unique_id=1996320185]
