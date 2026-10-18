@@ -1,18 +1,14 @@
-[gd_scene format=3 uid="uid://b8wjsb7q687e5"]
+[gd_scene format=3 uid="uid://cp0elb5ch0ill"]
 
-[ext_resource type="Texture2D" uid="uid://cj7opx0spixtj" path="res://icon.svg" id="1_r8opr"]
-[ext_resource type="PackedScene" uid="uid://cft5jw6p8koe3" path="res://Scenes/RPGScenes/Objects/interact_area.tscn" id="1_wpsxb"]
+[ext_resource type="Script" uid="uid://dojqygr750thw" path="res://Scenes/RPGScenes/Objects/door.gd" id="1_d3ugo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_68nwu"]
-size = Vector2(128.5, 128.5)
+size = Vector2(111, 41)
 
-[node name="Door" type="StaticBody2D" unique_id=444860493]
+[node name="Area2D" type="Area2D" unique_id=916394868]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_d3ugo")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1596656708]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1521690617]
 shape = SubResource("RectangleShape2D_68nwu")
-
-[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" unique_id=873660807]
-texture = ExtResource("1_r8opr")
-
-[node name="interact_area" parent="." unique_id=714599249 instance=ExtResource("1_wpsxb")]
-position = Vector2(0, 75)

@@ -2,20 +2,21 @@
 
 [ext_resource type="Script" uid="uid://bctw7xqwxgbth" path="res://Scenes/RPGScenes/Characters/red.gd" id="1_p0cqy"]
 [ext_resource type="Texture2D" uid="uid://btn1r50o1lyaf" path="res://Scenes/RPGScenes/WorldSprites/danielDown1.png" id="2_p2udq"]
-[ext_resource type="Texture2D" uid="uid://bh3vuaka4psny" path="res://Scenes/RPGScenes/WorldSprites/danielIdleDown.png" id="3_h1qds"]
-[ext_resource type="Texture2D" uid="uid://cdrej66ddvcgn" path="res://Scenes/RPGScenes/WorldSprites/danielDown2.png" id="4_wkn3o"]
-[ext_resource type="Texture2D" uid="uid://dp8gbb61fvjq6" path="res://Scenes/RPGScenes/WorldSprites/danielLeft1.png" id="5_m5ejf"]
-[ext_resource type="Texture2D" uid="uid://ctdh7wb3u0srm" path="res://Scenes/RPGScenes/WorldSprites/danielIdleLeft.png" id="6_ocnb1"]
-[ext_resource type="Texture2D" uid="uid://dggvqsmnnaj41" path="res://Scenes/RPGScenes/WorldSprites/danielLeft2.png" id="7_tqr1y"]
-[ext_resource type="Texture2D" uid="uid://uqn1fcxh623f" path="res://Scenes/RPGScenes/WorldSprites/danielRight2.png" id="8_iprtf"]
-[ext_resource type="Texture2D" uid="uid://da1jqsjj0sobf" path="res://Scenes/RPGScenes/WorldSprites/danielIdleRight.png" id="9_ujd17"]
-[ext_resource type="Texture2D" uid="uid://br868fdg5hraw" path="res://Scenes/RPGScenes/WorldSprites/danielRight1.png" id="10_apnnc"]
+[ext_resource type="Texture2D" uid="uid://b26od4vii0ir3" path="res://Scenes/RPGScenes/WorldSprites/danielIdleDown.png" id="3_h1qds"]
+[ext_resource type="Texture2D" uid="uid://c65nyngv716l6" path="res://Scenes/RPGScenes/WorldSprites/danielDown2.png" id="4_wkn3o"]
+[ext_resource type="Texture2D" uid="uid://dc3pqib7jr8wc" path="res://Scenes/RPGScenes/WorldSprites/danielLeft1.png" id="5_m5ejf"]
+[ext_resource type="Texture2D" uid="uid://dnsgid563i5po" path="res://Scenes/RPGScenes/WorldSprites/danielIdleLeft.png" id="6_ocnb1"]
+[ext_resource type="Texture2D" uid="uid://c3beespiuvjq4" path="res://Scenes/RPGScenes/WorldSprites/danielLeft2.png" id="7_tqr1y"]
+[ext_resource type="Texture2D" uid="uid://c4gtl4lsalt50" path="res://Scenes/RPGScenes/WorldSprites/danielRight2.png" id="8_iprtf"]
+[ext_resource type="Texture2D" uid="uid://dhppvbg5c78cy" path="res://Scenes/RPGScenes/WorldSprites/danielIdleRight.png" id="9_ujd17"]
+[ext_resource type="Texture2D" uid="uid://rlyontpcdeew" path="res://Scenes/RPGScenes/WorldSprites/danielRight1.png" id="10_apnnc"]
 [ext_resource type="Texture2D" uid="uid://c2uupt22w2dff" path="res://Scenes/RPGScenes/WorldSprites/danielUp1.png" id="11_kcivj"]
-[ext_resource type="Texture2D" uid="uid://c5jp4ruf3fpq1" path="res://Scenes/RPGScenes/WorldSprites/danielIdleUp.png" id="12_fyh6x"]
+[ext_resource type="Texture2D" uid="uid://k6o8w3p4e34g" path="res://Scenes/RPGScenes/WorldSprites/danielIdleUp.png" id="12_fyh6x"]
 [ext_resource type="Texture2D" uid="uid://n1gvqvettal3" path="res://Scenes/RPGScenes/WorldSprites/danielUp2.png" id="13_opfkj"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xpai1"]
-radius = 19.94
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sfpf3"]
+radius = 9.0
+height = 32.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qaae6"]
 animations = [{
@@ -89,14 +90,17 @@ animations = [{
 }]
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1838147545]
+collision_layer = 5
 collision_mask = 5
 script = ExtResource("1_p0cqy")
 
 [node name="PhysicalCollision" type="CollisionShape2D" parent="." unique_id=1957377172]
-shape = SubResource("CircleShape2D_xpai1")
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_sfpf3")
 
 [node name="PlayerAnimation" type="AnimatedSprite2D" parent="PhysicalCollision" unique_id=839994858]
-position = Vector2(0, -33)
+position = Vector2(44, 3.8146973e-06)
+rotation = 1.5707964
 sprite_frames = SubResource("SpriteFrames_qaae6")
 animation = &"downWalk"
 frame_progress = 0.65209687

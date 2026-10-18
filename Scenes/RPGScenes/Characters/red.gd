@@ -5,6 +5,7 @@ var max_speed = 200
 
 var last_direction := Vector2(1,0)
 
+var is_interactable = false
 
 #movement instructions
 func _physics_process(delta) :
@@ -17,6 +18,7 @@ func _physics_process(delta) :
 		play_walk_animation(last_direction)
 	else :
 		$PhysicalCollision/PlayerAnimation.stop()
+		
 
 func play_walk_animation(direction) :
 	if direction.x > 0 :
@@ -27,3 +29,10 @@ func play_walk_animation(direction) :
 		$PhysicalCollision/PlayerAnimation.play("downWalk")
 	elif direction.y < 0 :
 		$PhysicalCollision/PlayerAnimation.play("upWalk")
+		
+
+func upscale() :
+	scale = Vector2(2.0,2.0)
+	
+func changeSpeed(new_speed) :
+	max_speed = new_speed

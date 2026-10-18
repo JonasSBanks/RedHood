@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://b61mdjmg23jw2"]
+
+[ext_resource type="Script" uid="uid://4l563g4hgu7m" path="res://Scenes/RPGScenes/WorldScripts/forage_choice.gd" id="1_w1ajr"]
+[ext_resource type="Texture2D" uid="uid://boysfwltlkvsm" path="res://Scenes/RPGScenes/ingredientSprite/butterfly_petrified_good_final.png" id="2_fmlx2"]
+[ext_resource type="Texture2D" uid="uid://dtv6fkbe7ru7l" path="res://Scenes/RPGScenes/ingredientSprite/butterfly_petrified_bad_final.png" id="3_ge1p1"]
+
+[node name="ForageMinigame" type="Control" unique_id=785444902]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w1ajr")
+
+[node name="LeftChoice" type="TextureRect" parent="." unique_id=992160455]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 480.0
+offset_right = 760.0
+offset_bottom = 735.0
+texture = ExtResource("2_fmlx2")
+
+[node name="RightChoice" type="TextureRect" parent="." unique_id=332046315]
+layout_mode = 0
+offset_left = 1048.0
+offset_top = 280.0
+offset_right = 1282.0
+offset_bottom = 546.0
+texture = ExtResource("3_ge1p1")
+
+[node name="Label" type="Label" parent="." unique_id=1760655794]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Example"

@@ -5,5 +5,3 @@ extends Area2D
 
 #behavior of interaction
 #will be overriden
-func interact(player: CharacterBody2D) -> void :
-	print("interacted with: ", owner.name)
