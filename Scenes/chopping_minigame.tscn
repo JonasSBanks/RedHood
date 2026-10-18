@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dqvkx6flhobqy"]
 
 [ext_resource type="Script" uid="uid://r1cvec4uqvlg" path="res://Scripts/chopping_minigame.gd" id="1_h1ha5"]
+[ext_resource type="AudioStream" uid="uid://bq3rcujms5xqj" path="res://Brewing Stations Sprites/Chop_Sound.mp3" id="2_d16uq"]
 
 [node name="ChoppingMinigame" type="Control" unique_id=1979128462]
 layout_mode = 3
@@ -10,6 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h1ha5")
+chop_sound = ExtResource("2_d16uq")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1259772941]
 layout_mode = 1
@@ -23,29 +25,47 @@ color = Color(0.11764706, 0.101960786, 0.08627451, 0.46666667)
 
 [node name="ItemPicture" type="TextureRect" parent="." unique_id=1314538242]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 603.0
-offset_top = 106.0
-offset_right = 1246.0
-offset_bottom = 552.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -321.5
+offset_top = -223.0
+offset_right = 321.5
+offset_bottom = 223.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
 [node name="Progress" type="ProgressBar" parent="." unique_id=995271518]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 534.0
-offset_top = 808.0
-offset_right = 1331.0
-offset_bottom = 957.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.87900007
+anchor_right = 0.5
+anchor_bottom = 0.87900007
+offset_left = -398.0
+offset_top = -57.32007
+offset_right = 399.0
+offset_bottom = 57.67993
+grow_horizontal = 2
+grow_vertical = 0
 mouse_filter = 2
 
 [node name="Hint" type="Label" parent="." unique_id=1896023713]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 849.0
-offset_top = 174.0
-offset_right = 1063.0
-offset_bottom = 323.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -107.0
+offset_right = 107.0
+offset_bottom = 149.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 45

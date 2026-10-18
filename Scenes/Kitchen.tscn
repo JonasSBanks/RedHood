@@ -16,13 +16,14 @@
 [ext_resource type="Script" uid="uid://d36lky8yvbbxw" path="res://Scripts/grandma.gd" id="13_vo3np"]
 [ext_resource type="Texture2D" uid="uid://cg4y4b3m77k4a" path="res://Brewing Stations Sprites/Grandma_Temp.png" id="14_bap62"]
 [ext_resource type="Texture2D" uid="uid://c4rpilr0cqvmy" path="res://Brewing Stations Sprites/book_page_one_final_no_arrow.png" id="14_kte2b"]
-[ext_resource type="Texture2D" uid="uid://drpt7oww8wcf5" path="res://Brewing Stations Sprites/book_arrow_final_pointing_right.png" id="15_kjilo"]
+[ext_resource type="Texture2D" uid="uid://c18d0o75bv6o2" path="res://Brewing Stations Sprites/book_arrow_final_pointing_right.png" id="15_kjilo"]
 [ext_resource type="Texture2D" uid="uid://dud0ng45hbo23" path="res://Brewing Stations Sprites/Footprint_Temp.png" id="15_vpw7v"]
-[ext_resource type="Texture2D" uid="uid://dbsrr1m6i042q" path="res://Brewing Stations Sprites/book_arrow_final_pointing_left.png" id="16_n8gw7"]
+[ext_resource type="Texture2D" uid="uid://v8xwvpel7h0a" path="res://Brewing Stations Sprites/book_arrow_final_pointing_left.png" id="16_n8gw7"]
 [ext_resource type="Script" uid="uid://ubfg181nb00f" path="res://Scenes/kitchen_timer.gd" id="16_th3l3"]
 [ext_resource type="Script" uid="uid://cwi0py2attgra" path="res://Scripts/stash_spot.gd" id="17_kjilo"]
 [ext_resource type="Texture2D" uid="uid://o1e7yq5wf477" path="res://Brewing Stations Sprites/Bag_Picture_Temp.png" id="17_n8gw7"]
 [ext_resource type="Texture2D" uid="uid://dv5vwo5cr8n0a" path="res://Brewing Stations Sprites/ingredient_box_final.png" id="18_wpu4e"]
+[ext_resource type="Texture2D" uid="uid://du2lj4fu3gb15" path="res://Brewing Stations Sprites/knife_final.png" id="20_qfxda"]
 
 [node name="Node2D" type="Node2D" unique_id=1956303759]
 
@@ -190,11 +191,15 @@ offset_top = -19.863007
 offset_right = 27.024
 offset_bottom = 20.136993
 grow_vertical = 0
-texture_normal = ExtResource("16_n8gw7")
 ignore_texture_size = true
 stretch_mode = 5
 
 [node name="SnatchSound" type="AudioStreamPlayer" parent="CanvasLayer/Cooking Game/RecipeBook" unique_id=2137439726]
+
+[node name="BookArrowFinalPointingLeft" type="Sprite2D" parent="CanvasLayer/Cooking Game/RecipeBook" unique_id=360473896]
+position = Vector2(21, 286)
+scale = Vector2(0.51666665, 0.5)
+texture = ExtResource("16_n8gw7")
 
 [node name="StashSpot" type="TextureRect" parent="CanvasLayer/Cooking Game" unique_id=2078734392]
 layout_mode = 1
@@ -251,6 +256,22 @@ offset_top = -88.58301
 offset_right = 465.01996
 offset_bottom = 100.41699
 script = ExtResource("3_t2sl4")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Cooking Game" unique_id=1969463882]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.298
+anchor_top = 0.684
+anchor_right = 0.298
+anchor_bottom = 0.684
+offset_left = -123.160034
+offset_top = -121.72003
+offset_right = 122.839966
+offset_bottom = 121.27997
+mouse_filter = 2
+texture = ExtResource("20_qfxda")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Grandma" type="CanvasLayer" parent="." unique_id=903420290]
 script = ExtResource("13_vo3np")

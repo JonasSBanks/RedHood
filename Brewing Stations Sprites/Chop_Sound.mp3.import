@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bq3rcujms5xqj"
+path="res://.godot/imported/Chop_Sound.mp3-37292fb74905f4bba0d1e90ba0e9e3d2.mp3str"
+
+[deps]
+
+source_file="res://Brewing Stations Sprites/Chop_Sound.mp3"
+dest_files=["res://.godot/imported/Chop_Sound.mp3-37292fb74905f4bba0d1e90ba0e9e3d2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
