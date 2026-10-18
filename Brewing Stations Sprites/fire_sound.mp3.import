@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dxv7uem6pgjxf"
+path="res://.godot/imported/fire_sound.mp3-d5fc95c5cd3405397b5349874e7a263e.mp3str"
+
+[deps]
+
+source_file="res://Brewing Stations Sprites/fire_sound.mp3"
+dest_files=["res://.godot/imported/fire_sound.mp3-d5fc95c5cd3405397b5349874e7a263e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://chys54eqtnf2w"]
+
+[ext_resource type="Script" uid="uid://cjtddiwmqk6md" path="res://Scenes/credits.gd" id="1_ccovl"]
+[ext_resource type="Texture2D" uid="uid://jh6dsiv06b5d" path="res://Cutscene_Sprites/credits_final.png" id="1_r18jl"]
+[ext_resource type="Texture2D" uid="uid://blfd0iwog8drw" path="res://Cutscene_Sprites/end_cutscene_frame_2.png" id="2_1bamb"]
+[ext_resource type="Texture2D" uid="uid://ed3rqffu4bj8" path="res://Cutscene_Sprites/end_cutscene_frame_1.png" id="2_xelri"]
+[ext_resource type="Texture2D" uid="uid://d1iln3jc60pvx" path="res://Cutscene_Sprites/end_cutscene_frame_3.png" id="3_xelri"]
+
+[node name="credits" type="Control" unique_id=1543061281]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ccovl")
+intro_frames = Array[Texture2D]([ExtResource("2_xelri"), ExtResource("2_1bamb"), ExtResource("3_xelri"), ExtResource("1_r18jl")])

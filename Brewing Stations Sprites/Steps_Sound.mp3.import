@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dtgje22hkpis0"
+path="res://.godot/imported/Steps_Sound.mp3-082e392c5fecab922dab711b3257454f.mp3str"
+
+[deps]
+
+source_file="res://Brewing Stations Sprites/Steps_Sound.mp3"
+dest_files=["res://.godot/imported/Steps_Sound.mp3-082e392c5fecab922dab711b3257454f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

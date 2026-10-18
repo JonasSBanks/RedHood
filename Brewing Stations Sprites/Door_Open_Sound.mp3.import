@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dmia5tjv3wef6"
+path="res://.godot/imported/Door_Open_Sound.mp3-c35d6e20ff6f2ab2b8582f0d474ff919.mp3str"
+
+[deps]
+
+source_file="res://Brewing Stations Sprites/Door_Open_Sound.mp3"
+dest_files=["res://.godot/imported/Door_Open_Sound.mp3-c35d6e20ff6f2ab2b8582f0d474ff919.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
