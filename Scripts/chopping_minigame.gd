@@ -46,6 +46,17 @@ signal finished
 ## How long a gash takes to fade away, in seconds.
 @export var gash_fade_time: float = 0.4
 
+
+@export_group("Look")
+## Color of the progress bar's fill.
+@export var bar_color: Color = Color(0.95, 0.55, 0.2)
+## Font for the hint text at the top. Leave empty for the default font.
+@export var hint_font: Font
+## Size of the hint text.
+@export var hint_font_size: int = 34
+## How far down from the top of the screen the hint text sits (it's always centered).
+@export var hint_top: float = 24.0
+
 const KNIFE_PICTURE := "knife_final"
 
 ## Set by the cutting board before the minigame is shown.
@@ -68,7 +79,10 @@ func _ready() -> void:
 	progress.max_value = 100
 	progress.step = 0.0  # no rounding, so the slow drain shows up
 	progress.value = 0  # starts empty
-	hint.text = "Click fast to chop the %s!" % item_name
+	MinigameStyle.style_bar(progress, bar_color)
+	MinigameStyle.style_hint(hint, hint_font, hint_font_size)
+	MinigameStyle.place_top_center(hint, hint_top)
+	MinigameStyle.set_hint(hint, "Click fast to chop the %s!" % item_name)
 	_build_effects()
 
 
@@ -106,6 +120,7 @@ func _exit_tree() -> void:
 ## Runs every frame: the knife follows the mouse, and the bar slowly drains.
 func _process(delta: float) -> void:
 	_move_knife()
+	MinigameStyle.tick_bar(progress, bar_color)
 	if _done:
 		return
 	progress.value = max(progress.value - drain_per_second * delta, 0.0)
@@ -138,7 +153,7 @@ func _chop(at: Vector2) -> void:
 ## Bar is full: short pause so the player sees it, then tell the board.
 func _complete() -> void:
 	_done = true
-	hint.text = "Chopped!"
+	MinigameStyle.set_hint(hint, "Chopped!")
 	item_picture.texture = Ingredient.get_texture("Chopped " + item_name)
 	await get_tree().create_timer(0.6).timeout
 	finished.emit()

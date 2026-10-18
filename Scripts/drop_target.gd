@@ -9,6 +9,15 @@ class_name DropTarget
 
 @export var highlight_color: Color = Color(1.2, 1.2, 0.8)
 
+@export_group("Drop sound")
+## Plays when something is dropped on this station (optional).
+## Cutting board / mortar: placing an item. Cauldron: an item going in.
+@export var drop_sound: AudioStream
+## Each drop's pitch varies a little so repeats don't sound identical.
+@export var drop_pitch_variation: float = 0.1
+
+var _drop_sound_player: AudioStreamPlayer
+
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
@@ -37,8 +46,21 @@ func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 ## Godot calls this when the player lets go over the station.
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	_clear_highlight()
+	play_drop_sound()
 	on_drop(data)
 	bounce()
+
+
+## Plays Drop Sound, if one is set.
+func play_drop_sound() -> void:
+	if not drop_sound:
+		return
+	if not _drop_sound_player:
+		_drop_sound_player = AudioStreamPlayer.new()
+		add_child(_drop_sound_player)
+	_drop_sound_player.stream = drop_sound
+	_drop_sound_player.pitch_scale = randf_range(1.0 - drop_pitch_variation, 1.0 + drop_pitch_variation)
+	_drop_sound_player.play()
 
 
 func _notification(what: int) -> void:

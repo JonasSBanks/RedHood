@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://pi4xxsmy1mge"
+path="res://.godot/imported/Poo_sound.mp3-5c88fccb8b4c3cc81bc0fd693a25a3a1.mp3str"
+
+[deps]
+
+source_file="res://Brewing Stations Sprites/Poo_sound.mp3"
+dest_files=["res://.godot/imported/Poo_sound.mp3-5c88fccb8b4c3cc81bc0fd693a25a3a1.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

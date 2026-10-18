@@ -18,9 +18,9 @@ extends Control
 signal finished
 
 ## How much one full circle adds to the bar (the bar goes from 0 to 100).
-@export var fill_per_circle: float = 25.0
+@export var fill_per_circle: float = 12.0
 ## How much the bar drains every second.
-@export var drain_per_second: float = 15.0
+@export var drain_per_second: float = 12.0
 ## Circling closer than this to the center doesn't count. Stops tiny wiggles
 ## right in the middle from counting as huge spins.
 @export var min_radius: float = 40.0
@@ -42,6 +42,17 @@ signal finished
 @export var dust_color: Color = Color(0.85, 0.8, 0.7)
 ## How many dust bits per second while grinding.
 @export var dust_amount: int = 24
+
+
+@export_group("Look")
+## Color of the progress bar's fill.
+@export var bar_color: Color = Color(0.7, 0.5, 0.9)
+## Font for the hint text at the top. Leave empty for the default font.
+@export var hint_font: Font
+## Size of the hint text.
+@export var hint_font_size: int = 34
+## How far down from the top of the screen the hint text sits (it's always centered).
+@export var hint_top: float = 24.0
 
 const PESTLE_PICTURE := "pestle_final"
 ## How long after the last movement it still counts as "grinding" (seconds).
@@ -72,7 +83,10 @@ func _ready() -> void:
 	progress.max_value = 100
 	progress.step = 0.0  # no rounding, so small changes show up
 	progress.value = 0  # starts empty
-	hint.text = "Circle the mouse to grind the %s!" % item_name
+	MinigameStyle.style_bar(progress, bar_color)
+	MinigameStyle.style_hint(hint, hint_font, hint_font_size)
+	MinigameStyle.place_top_center(hint, hint_top)
+	MinigameStyle.set_hint(hint, "Circle the mouse to grind the %s!" % item_name)
 	_build_effects()
 
 
@@ -124,6 +138,7 @@ func _exit_tree() -> void:
 ## moved around the center of the mortar since last frame.
 func _process(delta: float) -> void:
 	_move_pestle()
+	MinigameStyle.tick_bar(progress, bar_color)
 	# Spin around the middle of the picture, not its corner.
 	item_picture.pivot_offset = item_picture.size / 2.0
 	_dust.position = item_picture.position + item_picture.size / 2.0
@@ -180,6 +195,6 @@ func _update_grind_effects() -> void:
 ## Bar is full: short pause so the player sees it, then tell the mortar.
 func _complete() -> void:
 	_done = true
-	hint.text = "Ground!"
+	MinigameStyle.set_hint(hint, "Ground!")
 	await get_tree().create_timer(0.6).timeout
 	finished.emit()

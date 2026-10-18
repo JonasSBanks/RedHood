@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://n7eseib44mvn" path="res://Brewing Stations Sprites/fire_frame_3.png" id="5_jr8e1"]
 [ext_resource type="Texture2D" uid="uid://cycklhgn5mfya" path="res://Brewing Stations Sprites/fire_frame_4.png" id="6_povyu"]
 [ext_resource type="Texture2D" uid="uid://cidwqufrh547i" path="res://Brewing Stations Sprites/fire_frame_5.png" id="7_vyyvh"]
+[ext_resource type="AudioStream" uid="uid://bot75p280deom" path="res://Brewing Stations Sprites/Boil.mp3" id="8_dg64g"]
+[ext_resource type="AudioStream" uid="uid://dxv7uem6pgjxf" path="res://Brewing Stations Sprites/fire_sound.mp3" id="9_y66uf"]
 
 [node name="BoilingMinigame" type="Control" unique_id=1747993051]
 layout_mode = 3
@@ -19,6 +21,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_v4u7w")
 fire_frames = Array[Texture2D]([ExtResource("2_6gsab"), ExtResource("3_dg64g"), ExtResource("4_y66uf"), ExtResource("5_jr8e1"), ExtResource("6_povyu"), ExtResource("7_vyyvh")])
+boil_sound = ExtResource("8_dg64g")
+log_sound = ExtResource("9_y66uf")
 
 [node name="Background" type="ColorRect" parent="." unique_id=976059628]
 visible = false

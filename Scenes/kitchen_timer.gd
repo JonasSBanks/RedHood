@@ -8,6 +8,9 @@ extends CanvasLayer
 ##   final warning    - right before the end, with Grandma's sound in the house
 ##
 ## Sits on its own layer above the minigames, so warnings are always seen.
+## The warning uses the same look as the minigame hints (MinigameStyle), sits
+## centered near the top but lower than the hints so they never overlap, and
+## fades in and out. The final warning gets a red banner.
 ##
 ## Child nodes, all optional (missing ones are skipped):
 ##   WarningLabel       a Label that shows the warning text for a few seconds
@@ -28,6 +31,17 @@ signal warning_shown(index: int)
 @export var halfway_text: String = "Half your time is gone."
 @export var final_text: String = "She's almost home!"
 
+@export_group("Look")
+## Font for the warnings. Leave empty for the default font.
+@export var warning_font: Font
+## Size of the warning text.
+@export var warning_font_size: int = 30
+## How far down from the top of the screen the warning sits (always centered).
+## Keep it below the minigame hints (they sit at 24) so they don't overlap.
+@export var warning_top: float = 120.0
+## Banner color for the final warning.
+@export var final_banner_color: Color = Color(0.55, 0.08, 0.06, 0.85)
+
 @onready var warning_label: Label = get_node_or_null("WarningLabel")
 @onready var warning_sound: AudioStreamPlayer = get_node_or_null("WarningSound")
 @onready var final_warning_sound: AudioStreamPlayer = get_node_or_null("FinalWarningSound")
@@ -38,6 +52,7 @@ var _warnings: Array = []     # [seconds_in, text, is_final], in order
 var _next_warning := 0
 var _label_time_left := 0.0
 var _done := false
+var _fade: Tween
 
 
 func _ready() -> void:
@@ -50,7 +65,10 @@ func _ready() -> void:
 	]
 	if warning_label:
 		warning_label.visible = false
-		warning_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		MinigameStyle.style_hint(warning_label, warning_font, warning_font_size)
+		MinigameStyle.place_top_center(warning_label, warning_top)
+	else:
+		push_error("KitchenTimer: no child Label named exactly 'WarningLabel', so warnings won't show on screen.")
 	print("Kitchen timer started: ", _time_limit, " seconds")  # for testing
 
 
@@ -78,8 +96,11 @@ func _show_warning(index: int) -> void:
 	var is_final: bool = _warnings[index][2]
 	print("Kitchen timer warning ", index + 1, ": ", text)  # for testing
 	if warning_label:
-		warning_label.text = text
+		MinigameStyle.set_banner_color(warning_label,
+			final_banner_color if is_final else MinigameStyle.BANNER_COLOR)
 		warning_label.visible = true
+		MinigameStyle.set_hint(warning_label, text)
+		_fade_label(1.0, 0.25)
 		_label_time_left = warning_show_time
 	_play(final_warning_sound if is_final else warning_sound)
 	warning_shown.emit(index)
@@ -91,7 +112,19 @@ func _tick_label(delta: float) -> void:
 		return
 	_label_time_left -= delta
 	if _label_time_left <= 0.0 and warning_label:
-		warning_label.visible = false
+		_fade_label(0.0, 0.5)
+
+
+## Fades the warning in (to 1) or out (to 0). Hidden once fully faded out.
+func _fade_label(to: float, seconds: float) -> void:
+	if _fade:
+		_fade.kill()
+	if to > 0.0:
+		warning_label.modulate.a = 0.0
+	_fade = create_tween()
+	_fade.tween_property(warning_label, "modulate:a", to, seconds)
+	if to == 0.0:
+		_fade.tween_callback(func(): warning_label.visible = false)
 
 
 func _play(player: AudioStreamPlayer) -> void:
