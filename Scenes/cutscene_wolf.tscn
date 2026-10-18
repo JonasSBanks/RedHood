@@ -1,8 +1,18 @@
 [gd_scene format=3 uid="uid://dx84y86331wxq"]
 
 [ext_resource type="Script" uid="uid://cmrce0dh7lkdd" path="res://Scripts/cutscene.gd" id="1_g36ti"]
+[ext_resource type="Script" uid="uid://cpxoecq8vtw3u" path="res://Scripts/cutscene_slide.gd" id="2_cnsjt"]
+[ext_resource type="Texture2D" uid="uid://bxk2cmwdnbhps" path="res://Cutscene_Sprites/kitchen_background.png" id="3_2stxs"]
+[ext_resource type="Script" uid="uid://conpdct8j3yap" path="res://Scripts/cutscene_frames.gd" id="4_w3v7e"]
+[ext_resource type="Texture2D" uid="uid://d2bin045xsajk" path="res://Cutscene_Sprites/grandma_right_sprite.png" id="5_rwv2q"]
+[ext_resource type="Texture2D" uid="uid://5if36m5witax" path="res://Cutscene_Sprites/grandma_sipping_sprite.png" id="6_0pid1"]
+[ext_resource type="Texture2D" uid="uid://bejeq8vvo3evs" path="res://Cutscene_Sprites/grandma_sipping_sprite_squish.png" id="7_4aqhc"]
+[ext_resource type="Texture2D" uid="uid://bql15ddouialp" path="res://Cutscene_Sprites/grandma_transformation_sprite.png" id="8_wcvnj"]
+[ext_resource type="Texture2D" uid="uid://b3rosmmj27a2u" path="res://Cutscene_Sprites/grandma_wolf_eating_sprite.png" id="9_q1po4"]
+[ext_resource type="Texture2D" uid="uid://db28ypixixfqr" path="res://Cutscene_Sprites/grandma_wolf_sprite.png" id="10_6cban"]
+[ext_resource type="Texture2D" uid="uid://cd1or6muu4hkv" path="res://Cutscene_Sprites/daniel_left_sprite.png" id="11_rkqvh"]
 
-[node name="Control" type="Control" unique_id=1461263197]
+[node name="CutsceneWolf" type="Control" unique_id=1461263197]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,8 +21,35 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g36ti")
 
-[node name="Label" type="Label" parent="." unique_id=1327868608]
+[node name="Slide1" type="Control" parent="." unique_id=319627542]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_cnsjt")
+speaker = "Grandma"
+text = "I GAVE YOU PLEANT OF TIME AND YOU STILL SCREWD UP YOU LOSER"
+
+[node name="Background" type="TextureRect" parent="Slide1" unique_id=1312222067]
 layout_mode = 0
 offset_right = 40.0
-offset_bottom = 23.0
-text = "wolf"
+offset_bottom = 40.0
+texture = ExtResource("3_2stxs")
+
+[node name="Grandma" type="TextureRect" parent="Slide1/Background" unique_id=114529831]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 541.0
+offset_right = 498.0
+offset_bottom = 712.0
+script = ExtResource("4_w3v7e")
+frames = Array[Texture2D]([ExtResource("5_rwv2q"), ExtResource("5_rwv2q"), ExtResource("6_0pid1"), ExtResource("7_4aqhc"), ExtResource("6_0pid1"), ExtResource("6_0pid1"), ExtResource("8_wcvnj"), ExtResource("9_q1po4"), ExtResource("10_6cban")])
+
+[node name="Red" type="TextureRect" parent="Slide1/Background" unique_id=1989737791]
+layout_mode = 0
+offset_left = 472.0
+offset_top = 541.0
+offset_right = 577.0
+offset_bottom = 715.0
+texture = ExtResource("11_rkqvh")
+script = ExtResource("4_w3v7e")
+frames = Array[Texture2D]([ExtResource("11_rkqvh"), ExtResource("11_rkqvh"), ExtResource("11_rkqvh"), ExtResource("11_rkqvh"), ExtResource("11_rkqvh"), ExtResource("11_rkqvh"), ExtResource("11_rkqvh"), null, null])

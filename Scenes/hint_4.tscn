@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://8b701xhu4qhu"]
 
 [ext_resource type="Script" uid="uid://cmrce0dh7lkdd" path="res://Scripts/cutscene.gd" id="1_ug2nb"]
+[ext_resource type="Texture2D" uid="uid://spgjrx26bqt7" path="res://Cutscene_Sprites/19201080_black.png" id="2_xqohi"]
+[ext_resource type="Texture2D" uid="uid://djb2mm2xo6oev" path="res://Cutscene_Sprites/Bento_dialogue_box.png" id="3_1m518"]
 
 [node name="Control" type="Control" unique_id=1355350544]
 layout_mode = 3
@@ -11,8 +13,30 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ug2nb")
 
-[node name="Label" type="Label" parent="." unique_id=91222420]
+[node name="Background" type="TextureRect" parent="." unique_id=1223989792]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_xqohi")
+
+[node name="Bento" type="TextureRect" parent="Background" unique_id=1611949457]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "hint 4"
+offset_left = 331.0
+offset_top = 270.0
+offset_right = 1540.0
+offset_bottom = 831.0
+texture = ExtResource("3_1m518")
+
+[node name="Label" type="Label" parent="Background/Bento" unique_id=1241658347]
+custom_minimum_size = Vector2(0.01, 0.01)
+layout_mode = 0
+offset_left = 398.0
+offset_top = 178.0
+offset_right = 1118.0
+offset_bottom = 388.0
+theme_override_font_sizes/font_size = 40
+text = "There is a way to escape, written on page 2 of the book."
+autowrap_mode = 2

@@ -56,6 +56,42 @@ const DEBUG_KEYS := true
 var _debug_label: Label
 
 
+## ===== BACKGROUND MUSIC =====
+
+## The song that plays through the whole game, start to finish. It lives here
+## in GameManager (which never gets unloaded), so it keeps playing smoothly
+## across every scene change. Change the path to your song file.
+## Leave it "" for no music.
+const MUSIC_PATH := "res://Audio/music.ogg"
+## Music volume in decibels. 0 = full, -6 = about half, -80 = silent.
+const MUSIC_VOLUME_DB := -8.0
+
+var _music: AudioStreamPlayer
+
+
+## Starts the background music (called once when the game launches).
+func _start_music() -> void:
+	if MUSIC_PATH == "":
+		return
+	if not ResourceLoader.exists(MUSIC_PATH):
+		push_warning("GameManager: no music file at " + MUSIC_PATH + " - change MUSIC_PATH.")
+		return
+	_music = AudioStreamPlayer.new()
+	_music.stream = load(MUSIC_PATH)
+	_music.volume_db = MUSIC_VOLUME_DB
+	_music.process_mode = Node.PROCESS_MODE_ALWAYS  # keeps playing even if the game is paused
+	# Start again when it ends, so it loops even if the file isn't set to loop.
+	_music.finished.connect(_music.play)
+	add_child(_music)
+	_music.play()
+
+
+## Change the music volume from anywhere, e.g. GameManager.set_music_volume(-20).
+func set_music_volume(volume_db: float) -> void:
+	if _music:
+		_music.volume_db = volume_db
+
+
 ## ===== DAY SYSTEM =====
 
 ## Every way a day can end.
@@ -65,17 +101,21 @@ enum Outcome {
 	TIME_UP,   ## time ran out, Grandma came back for the book: day restarts
 	SNATCHED,  ## flipped the book while Grandma was in the room: day restarts
 	CAUGHT,    ## cooked with Wolfs Bane while Grandma was in the room: day restarts
-	POISON,    ## poison potion: ending, then credits
+	POISON,    ## poison potion: straight to the credits (you win)
 }
 
 ## Which cutscene plays for each ending.
+## Every way of failing (wrong potion, time up, snatched, caught) shares the
+## "wrong" cutscene. The poison has no cutscene: it goes straight to the
+## credits (see end_day).
+const GOOD_CUTSCENE := "res://Scenes/cutscene_good.tscn"
+const WRONG_CUTSCENE := "res://Scenes/cutscene_wrong.tscn"
 const CUTSCENES := {
-	Outcome.GOOD: "res://Scenes/cutscene_good.tscn",
-	Outcome.WRONG: "res://Scenes/cutscene_wrong.tscn",
-	Outcome.TIME_UP: "res://Scenes/cutscene_wolf.tscn",
-	Outcome.SNATCHED: "res://Scenes/cutscene_snatched.tscn",
-	Outcome.CAUGHT: "res://Scenes/cutscene_caught.tscn",
-	Outcome.POISON: "res://Scenes/cutscene_ending.tscn",
+	Outcome.GOOD: GOOD_CUTSCENE,
+	Outcome.WRONG: WRONG_CUTSCENE,
+	Outcome.TIME_UP: WRONG_CUTSCENE,
+	Outcome.SNATCHED: WRONG_CUTSCENE,
+	Outcome.CAUGHT: WRONG_CUTSCENE,
 }
 
 ## The hint scene for each day. Plays after that day's cutscene.
@@ -221,6 +261,10 @@ func end_day(outcome: Outcome) -> void:
 	if outcome == Outcome.GOOD:
 		day += 1
 	print("Day ", _day_played, " ended: ", Outcome.keys()[outcome], ". Next day: ", day)  # for testing
+	# The poison wins the game: straight to the credits, no cutscene.
+	if outcome == Outcome.POISON:
+		get_tree().change_scene_to_file(CREDITS_SCENE)
+		return
 	get_tree().change_scene_to_file(CUTSCENES[outcome])
 
 
@@ -245,6 +289,19 @@ func cutscene_finished() -> void:
 	start_day()
 
 
+## Starts the whole game over from day 1 (used after the credits).
+## Page 2, the stash and everything else are reset too.
+func restart_game() -> void:
+	day = 1
+	has_read_page_2 = false
+	stash.clear()
+	pocket = TEST_POCKET.duplicate() if USE_TEST_REFILL else {}
+	_last_outcome = Outcome.GOOD
+	_showing_hint = false
+	print("Restarting the game from day 1")  # for testing
+	start_day()
+
+
 ## Starts a day (new or restarted).
 ##   - Ingredients brought into the kitchen yesterday are gone (they were
 ##     taken out of the pocket when Start Cooking was pressed).
@@ -266,6 +323,7 @@ func start_day() -> void:
 ## ===== TEST SHORTCUTS (see DEBUG_KEYS) =====
 
 func _ready() -> void:
+	_start_music()
 	if DEBUG_KEYS:
 		# A small label in the top-left corner, drawn above everything.
 		var layer := CanvasLayer.new()
