@@ -74,5 +74,13 @@ shape = SubResource("RectangleShape2D_68nwu")
 position = Vector2(-270, 553)
 shape = SubResource("RectangleShape2D_qaae6")
 
-[node name="Area2D" parent="TileMapLayer" unique_id=916394868 instance=ExtResource("5_55pui")]
+[node name="ExitDoor" parent="TileMapLayer" unique_id=916394868 instance=ExtResource("5_55pui")]
 position = Vector2(1, 398)
+target_scene = "res://Scenes/RPGScenes/outsideNavigable.tscn"
+
+[node name="KitchenCounter" parent="TileMapLayer" unique_id=916394870 instance=ExtResource("5_55pui")]
+position = Vector2(-450, 165)
+scale = Vector2(4, 3)
+target_scene = "res://Scenes/Selection.tscn"
+press_e_to_use = true
+prompt_text = "Press E to cook"

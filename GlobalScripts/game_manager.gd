@@ -231,6 +231,17 @@ func stash_item(item_name: String) -> void:
 	print("Stashed ", item_name, ". Stash now: ", stash)  # for testing
 
 
+## Adds one of an ingredient to the pocket. Called by the forage spots.
+func add_to_pocket(item_name: String) -> void:
+	pocket[item_name] = pocket.get(item_name, 0) + 1
+	print("Foraged ", item_name, ". Pocket now: ", pocket)  # for testing
+	pocket_changed.emit()
+
+
+## Sent whenever something is foraged (the basket display listens to it).
+signal pocket_changed
+
+
 ## Call this when Start Cooking is pressed, before switching to the kitchen.
 ## Takes one of each selected ingredient out of the pocket, so it's used up.
 func take_selected_from_pocket() -> void:

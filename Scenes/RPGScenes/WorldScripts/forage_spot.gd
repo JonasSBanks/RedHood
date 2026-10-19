@@ -7,15 +7,17 @@ extends Area2D
 ## Set everything for the ingredient in the Inspector, e.g. for a mushroom:
 ##   Good Name: Mushroom        Good Texture: mushroom_good.png
 ##   Bad Name:  Bad Mushroom    Bad Texture:  mushroom_bad.png
+## Leave Bad Name empty for an item with only one version (e.g. Wolfs Bane):
+## pressing E then just picks it up, no choice screen.
 ##
 ## Needs:
 ##   a CollisionShape2D child (the area the player must stand in)
-##   the player node added to the group named in Player Group ("player")
+##   the player node added to the group named in Player Group
 ## Optional children:
 ##   Sprite2D called Sprite  - the plant in the world (hidden once picked)
-##   Label called Prompt     - e.g. "Press E", shown while the player is close
+##   Label called Prompt     - shown while the player is close (made for you if missing)
 
-## The choice screen. Drag forage_choice.tscn into this slot.
+## The choice screen. Drag forage_minigame.tscn into this slot.
 @export var choice_scene: PackedScene
 
 @export_group("Ingredient")
@@ -25,15 +27,19 @@ extends Area2D
 @export var bad_texture: Texture2D
 
 @export_group("Settings")
-## The input action that opens the choice. "ui_accept" is Enter/Space by default.
-## Change it to your own action (e.g. "interact") if you have one.
-@export var interact_action: StringName = &"ui_accept"
+## The input action that opens the choice ("interact" is E).
+@export var interact_action: StringName = &"interact"
 ## The group the player node is in, so only the player triggers it.
-@export var player_group: StringName = &"player"
-## If true, the spot can only be foraged once.
+@export var player_group: StringName = &"Red"
+## If true, the spot can only be foraged once per day.
 @export var one_time: bool = true
+## If true, the spot only shows up once the player has read page 2 of the
+## recipe book (GameManager.has_read_page_2). Use it for Wolfs Bane.
+@export var needs_page_2: bool = false
+## Text of the prompt shown while standing here.
+@export var prompt_text: String = "Press E"
 
-@onready var sprite: Node2D = get_node_or_null("Sprite")
+@onready var sprite: Node2D = _find_sprite()
 @onready var prompt: CanvasItem = get_node_or_null("Prompt")
 
 var _player_inside := false
@@ -42,6 +48,19 @@ var _used := false
 
 
 func _ready() -> void:
+	# Locked away until page 2 is read: hide and switch off completely.
+	if needs_page_2 and not GameManager.has_read_page_2:
+		visible = false
+		monitoring = false
+		set_process_unhandled_input(false)
+		return
+	# Already picked earlier today (e.g. the player went inside and came back out).
+	if one_time and _key() in GameManager.foraged_today:
+		_used = true
+		if sprite:
+			sprite.visible = false
+	if prompt == null:
+		prompt = _make_prompt()
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 	_update_prompt()
@@ -64,14 +83,17 @@ func _unhandled_input(event: InputEvent) -> void:
 	if _player_inside and not _open and not _used \
 			and event.is_action_pressed(interact_action):
 		get_viewport().set_input_as_handled()
-		_open_choice()
+		if bad_name == "":
+			_picked(good_name)  # only one version: just take it
+		else:
+			_open_choice()
 
 
 ## Opens the choice screen on its own CanvasLayer above everything,
 ## and pauses the game so the player can't walk off.
 func _open_choice() -> void:
 	if choice_scene == null:
-		push_error("ForageSpot: drag forage_choice.tscn into Choice Scene in the Inspector.")
+		push_error("ForageSpot: drag forage_minigame.tscn into Choice Scene in the Inspector.")
 		return
 	_open = true
 
@@ -92,24 +114,48 @@ func _open_choice() -> void:
 	_update_prompt()
 
 
-## The player picked one: add it to the pocket, close the screen, unpause.
+## The player picked one: close the screen, unpause, add it to the pocket.
 func _on_chosen(item_name: String, layer: CanvasLayer) -> void:
-	_add_to_pocket(item_name)
 	layer.queue_free()
 	get_tree().paused = false
 	_open = false
+	_picked(item_name)
+
+
+func _picked(item_name: String) -> void:
+	GameManager.add_to_pocket(item_name)
 	if one_time:
 		_used = true
+		GameManager.foraged_today.append(_key())
 		if sprite:
 			sprite.visible = false  # the plant has been picked
 	_update_prompt()
 
 
-## THE ONE LINE TO MATCH YOUR GAME: where foraged items are stored.
-## Change "pocket" to the name of your global pocket array in GameManager.
-func _add_to_pocket(item_name: String) -> void:
-	GameManager.pocket.append(item_name)
-	print("Pocket now has: ", GameManager.pocket)  # for testing, remove later
+## Name used to remember this spot was picked today.
+func _key() -> String:
+	return str(get_tree().current_scene.scene_file_path, ":", name)
+
+
+func _find_sprite() -> Node2D:
+	var s := get_node_or_null("Sprite")
+	if s == null:
+		s = get_node_or_null("Sprite2D")
+	return s
+
+
+func _make_prompt() -> Label:
+	var label := Label.new()
+	label.text = prompt_text
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.add_theme_font_size_override("font_size", 14)
+	label.add_theme_color_override("font_outline_color", Color.BLACK)
+	label.add_theme_constant_override("outline_size", 5)
+	label.size = Vector2(80, 20)
+	label.position = Vector2(-40, -72)
+	label.z_index = 10
+	add_child(label)
+	return label
 
 
 func _update_prompt() -> void:
