@@ -158,7 +158,7 @@ func _complete() -> void:
 	await get_tree().create_timer(0.6).timeout
 	finished.emit()
 
-
+#why are you looking at this
 # ===== Feedback =====
 
 ## Small shake on the ingredient for each chop.
